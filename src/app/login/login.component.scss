@@ -1,0 +1,33 @@
+mat-card {
+  margin: calc(5% + 10vh) auto;
+  width: 80%;
+  max-width: 1024px;
+}
+
+mat-card-content p {
+  width: 80%;
+  margin: auto;
+}
+
+h2 {
+  margin-left: 32px;
+}
+
+.login-fields {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+mat-form-field {
+  width: 30%;
+  min-width: 256px;
+  margin: auto 16px;
+}
+
+mat-card-footer {
+  margin: 16px;
+  p {
+    text-align: center;
+  }
+}

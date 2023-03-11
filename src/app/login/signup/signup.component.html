@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1>Sign up</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <br>
+  <mat-card-content>
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [type]="hidePass ? 'password' : 'text'"
+        placeholder="Your Password">
+      <button mat-icon-button matSuffix (click)="hidePass = !hidePass">
+        <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        [type]="hidePass ? 'password' : 'text'"
+        placeholder="Your Password">
+      <button mat-icon-button matSuffix (click)="hidePass = !hidePass">
+        <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-footer>
+    <button mat-stroked-button color="accent">Submit</button>
+  </mat-card-footer>
+</mat-card>>
