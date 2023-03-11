@@ -1,0 +1,24 @@
+mat-card {
+  margin: calc(5% + 10vh) auto;
+  width: 80%;
+  max-width: 1024px;
+}
+
+mat-card-content{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+mat-form-field {
+  width: 30%;
+  min-width: 256px;
+  margin: auto 16px;
+}
+
+mat-card-footer {
+  button {
+    margin-bottom: 32px;
+    margin-left: 32px;
+  }
+}
