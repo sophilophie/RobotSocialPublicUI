@@ -8,3 +8,32 @@ a {
     text-decoration: underline;
   }
 }
+
+.snackbar-success {
+  .mdc-snackbar__surface {
+    background-color: rgb(41, 94, 41) !important;
+  }
+  .mdc-snackbar__label {
+    color: white !important;
+  }
+}
+
+.snackbar-error {
+  .mdc-snackbar__surface {
+    background-color: rgb(110, 0, 0) !important;
+    color: white;
+  }
+  .mdc-snackbar__label {
+    color: white !important;
+  }
+}
+
+.snackbar-warn {
+  .mdc-snackbar__surface {
+    background-color: rgb(127, 83, 0) !important;
+    color: white;
+  }
+  .mdc-snackbar__label {
+    color: white !important;
+  }
+}

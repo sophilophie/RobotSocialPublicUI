@@ -18,26 +18,33 @@
     <mat-divider></mat-divider>
   </mat-card-content>
   <h2>Login</h2>
-  <div class="login-fields">
+  <form class="login-fields" [formGroup]="loginData">
     <mat-form-field appearance="outline">
       <mat-label>Username</mat-label>
-      <input matInput placeholder="Your Username">
+      <input
+        matInput
+        placeholder="Your Username"
+        [formControl]="usernameControl">
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
       <input
       matInput
       [type]="hidePass ? 'password' : 'text'"
-      placeholder="Your Password">
+      placeholder="Your Password"
+      [formControl]="passwordControl">
       <button mat-icon-button matSuffix (click)="hidePass = !hidePass">
         <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
-  </div>
+  </form>
   <p>
     Don't have an account? <a routerLink="/sign-up">Sign up</a>
   </p>
   <mat-card-actions>
-    <button mat-stroked-button color="accent">Submit</button>
+    <button
+      mat-stroked-button
+      color="accent"
+      (click)="handleLoginSubmit()">Submit</button>
   </mat-card-actions>
 </mat-card>

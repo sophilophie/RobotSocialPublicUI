@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-import { CustomValidators } from 'src/app/common/custom.validators';
+import { CustomValidators } from '../../common/util/custom.validators';
 import { UserServerAdapterService } from 'src/app/common/server-adapters/user-server-adapter.service';
 import { User } from 'src/app/common/types/user';
+import { NotificationService } from 'src/app/common/util/notification.service';
 
 @Component({
   selector: 'rspui-signup',
@@ -15,7 +15,7 @@ export class SignupComponent implements OnDestroy, OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userServerAdapterService: UserServerAdapterService,
-    private matSnackBar: MatSnackBar
+    private notificationService: NotificationService
   ) { }
 
   private subscription: Subscription | null = null;
@@ -58,23 +58,15 @@ export class SignupComponent implements OnDestroy, OnInit {
       this.userServerAdapterService.postUser(this.signupData.value as User).subscribe({
         next: (user) => {
           console.log(user);
-          this.matSnackBar.open('Signup Success!', '', {
-            horizontalPosition: 'left',
-            verticalPosition: 'top',
-            duration: 3000,
-            panelClass: 'snackbar-success'
-          });
+          this.notificationService.success('Signup Success!');
         },
         error: (err) => {
           console.error(err);
-          this.matSnackBar.open('Something went wrong!', '', {
-            horizontalPosition: 'left',
-            verticalPosition: 'top',
-            duration: 3000,
-            panelClass: 'snackbar-error'
-          })
+          this.notificationService.error('Something went wrong!');
         }
       });
+    } else {
+      this.notificationService.warn('There are errors in your signup form!');
     }
   }
 }
