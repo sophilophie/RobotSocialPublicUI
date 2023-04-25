@@ -15,7 +15,6 @@ export class LoginComponent {
   hidePass: boolean = true;
   constructor(
     private formBuilder: FormBuilder,
-    private userServerAdapterService: UserServerAdapterService,
     private notificationService: NotificationService,
     private store: Store
   ) {}
