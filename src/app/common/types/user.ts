@@ -12,6 +12,8 @@ export interface LoginDto {
   password: string;
 }
 
-export interface Token {
-  access_token: string;
+export interface JwtReponse {
+  access_token: string | null;
+  user: User | null;
+  error: any | null;
 }

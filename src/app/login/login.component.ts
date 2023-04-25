@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { UserServerAdapterService } from '../common/server-adapters/user-server-adapter.service';
-import { LoginDto, Token } from '../common/types/user';
+import { LoginDto } from '../common/types/user';
 import { NotificationService } from '../common/util/notification.service';
+import * as AuthActions from '../common/state/auth/auth.actions';
 
 @Component({
   selector: 'rspui-login',
@@ -14,7 +16,8 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private userServerAdapterService: UserServerAdapterService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private store: Store
   ) {}
 
   public usernameControl = new FormControl('', [Validators.required]);
@@ -27,18 +30,13 @@ export class LoginComponent {
 
   handleLoginSubmit() {
     if (this.loginData.valid) {
-      this.userServerAdapterService.postSession(this.loginData.value as LoginDto).subscribe({
-        next: (tokenObj: Token) => {
-          localStorage.setItem('access_token', tokenObj.access_token);
-          this.notificationService.success('Login Success!');
-        },
-        error: (err) => {
-          console.error(err);
-          this.notificationService.error('Something went wrong!');
-        }
-      });
+      this.store.dispatch(AuthActions.loginRequest(this.loginData.value as LoginDto));
     } else {
       this.notificationService.warn('Please enter your credentials!');
     }
+  }
+
+  toggleHidePass() {
+    this.hidePass = !this.hidePass;
   }
 }

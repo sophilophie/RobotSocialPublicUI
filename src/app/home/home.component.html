@@ -1,1 +1,3 @@
-<p>home works!</p>
+<h1 *ngIf="isLoggedIn$ | async">Logged In</h1>
+
+<rspui-login *ngIf="!(isLoggedIn$ | async)"></rspui-login>
