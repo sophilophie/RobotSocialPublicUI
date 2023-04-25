@@ -17,3 +17,7 @@ export interface JwtReponse {
   user: User | null;
   error: any | null;
 }
+
+export interface JwtDto {
+  access_token: string;
+}

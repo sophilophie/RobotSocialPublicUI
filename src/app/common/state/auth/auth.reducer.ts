@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { User } from "../../types/user";
-import { loginFailure, loginSuccess } from "./auth.actions";
+import { loginFailure, loginSuccess, refreshFailure, refreshSuccess } from "./auth.actions";
 
 export interface AuthState {
   access_token: string | null;
@@ -28,6 +28,22 @@ export const authReducer = createReducer(
     return {
       ...state,
       loginError: jwtResponse.error,
+      token: null,
+      user: null,
+      isLoggedIn: false
+    }
+  }),
+  on(refreshSuccess, (state, jwtResponse) => {
+    return {
+      ...state,
+      token: jwtResponse.access_token,
+      user: jwtResponse.user,
+      isLoggedIn: true
+    }
+  }),
+  on(refreshFailure, (state, jwtResponse) => {
+    return {
+      ...state,
       token: null,
       user: null,
       isLoggedIn: false

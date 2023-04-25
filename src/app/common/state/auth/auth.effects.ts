@@ -23,10 +23,10 @@ export class AuthEffects {
           .pipe(
             map((response) => AuthActions.loginSuccess(response)),
             catchError((error) => of(AuthActions.loginFailure(error)))
-          )
+          );
       })
     )
-  )
+  );
 
   public loginSuccess$ = createEffect(() =>
     this.actions$.pipe(
@@ -37,7 +37,7 @@ export class AuthEffects {
       })
     ),
     { dispatch: false }
-  )
+  );
 
   public loginFailure$ = createEffect(() =>
     this.actions$.pipe(
@@ -47,5 +47,39 @@ export class AuthEffects {
       })
     ),
     { dispatch: false }
-  )
+  );
+
+  public refreshRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.refreshRequest),
+      exhaustMap((action): ObservableInput<any> => {
+        return this.userServerAdapterService.postRefreshSession(action)
+          .pipe(
+            map((response) => AuthActions.refreshSuccess(response)),
+            catchError((error) => of(AuthActions.refreshFailure(error)))
+          );
+      })
+    )
+  );
+
+  public refreshSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.refreshSuccess),
+      tap((response) => {
+        localStorage.setItem('access_token', response.access_token as string);
+        this.notificationService.success('Welcome Back!');
+      })
+    ),
+    { dispatch: false }
+  );
+
+  public refreshFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.refreshFailure),
+      tap(() => {
+        this.notificationService.error('Something went wrong. Please log in again.');
+      })
+    ),
+    { dispatch: false }
+  );
 }
