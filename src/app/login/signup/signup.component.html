@@ -71,7 +71,7 @@
           [type]="hidePass ? 'password' : 'text'"
           placeholder="Your Password"
           [formControl]="passwordFormControl">
-        <button mat-icon-button matSuffix (click)="hidePass = !hidePass">
+        <button mat-icon-button matSuffix type="button" (click)="hidePass = !hidePass">
           <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
         <mat-error *ngIf="passwordFormControl.errors && passwordFormControl.invalid && !passwordFormControl.hasError('required')">
@@ -88,7 +88,7 @@
           [type]="hidePass ? 'password' : 'text'"
           placeholder="Your Password"
           [formControl]="confirmPasswordFormControl">
-        <button mat-icon-button matSuffix (click)="hidePass = !hidePass">
+        <button mat-icon-button matSuffix type="button" (click)="hidePass = !hidePass">
           <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
         <mat-error *ngIf="confirmPasswordFormControl.hasError('matching')">
@@ -106,6 +106,7 @@
       <button
       mat-stroked-button
       color="accent"
+      type="submit"
       (click)="handleSubmit()">Submit</button>
     </mat-card-actions>
   </form>

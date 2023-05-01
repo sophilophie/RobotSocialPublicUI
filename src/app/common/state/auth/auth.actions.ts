@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { JwtReponse, LoginDto, JwtDto } from "../../types/user";
+import { User } from 'src/app/common/types/user';
 
 export const loginRequest = createAction(
   '[AUTH] Login Request',
@@ -28,5 +29,20 @@ export const refreshSuccess = createAction(
 
 export const refreshFailure = createAction(
   '[AUTH] Refresh Failure',
+  props<JwtReponse>()
+);
+
+export const signupRequest = createAction(
+  '[AUTH] Signup Request',
+  props<User>()
+);
+
+export const signupSuccess = createAction(
+  '[AUTH] Signup Success',
+  props<JwtReponse>()
+);
+
+export const signupFailure = createAction(
+  '[AUTH] Signup Failure',
   props<JwtReponse>()
 );

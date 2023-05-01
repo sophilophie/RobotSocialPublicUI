@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Store } from "@ngrx/store";
 import { catchError, exhaustMap, ObservableInput, map, tap, of } from "rxjs";
 import { UserServerAdapterService } from "../../server-adapters/user-server-adapter.service";
 import { NotificationService } from "../../util/notification.service";
@@ -12,7 +12,7 @@ export class AuthEffects {
     private actions$: Actions,
     private userServerAdapterService: UserServerAdapterService,
     private notificationService: NotificationService,
-    private store: Store
+    private router: Router
   ) {}
 
   public loginRequest$ = createEffect(() =>
@@ -78,6 +78,44 @@ export class AuthEffects {
       ofType(AuthActions.refreshFailure),
       tap(() => {
         this.notificationService.error('Something went wrong. Please log in again.');
+      })
+    ),
+    { dispatch: false }
+  );
+
+  public signupRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.signupRequest),
+      exhaustMap((user): ObservableInput<any> => {
+        return this.userServerAdapterService.postUser(user)
+          .pipe(
+            map((response) => AuthActions.signupSuccess(response)),
+            catchError((error) => of(AuthActions.signupFailure(error)))
+          );
+      })
+    )
+  );
+
+  public signupSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.signupSuccess),
+      tap((response) => {
+        localStorage.setItem('access_token', response.access_token as string);
+        this.router.navigate(['/']);
+        this.notificationService.success('Login Successful!');
+      })
+    ),
+    { dispatch: false }
+  );
+
+  public signupFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.signupFailure),
+      tap((response: any) => {
+        if (response.status === 409) {
+          return this.notificationService.error('Username or email has been taken');
+        }
+        this.notificationService.error('Something went wrong. Please try again.');
       })
     ),
     { dispatch: false }
