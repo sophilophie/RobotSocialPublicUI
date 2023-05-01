@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { User } from "../../types/user";
-import { loginFailure, loginSuccess, refreshFailure, refreshSuccess } from "./auth.actions";
+import * as AuthActions from "./auth.actions";
 
 export interface AuthState {
   access_token: string | null;
@@ -16,7 +16,7 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(loginSuccess, (state, jwtResponse) => {
+  on(AuthActions.loginSuccess, (state, jwtResponse) => {
     return {
       ...state,
       token: jwtResponse.access_token,
@@ -24,7 +24,7 @@ export const authReducer = createReducer(
       isLoggedIn: true
     }
   }),
-  on(loginFailure, (state, jwtResponse) => {
+  on(AuthActions.loginFailure, (state, jwtResponse) => {
     return {
       ...state,
       loginError: jwtResponse.error,
@@ -33,7 +33,7 @@ export const authReducer = createReducer(
       isLoggedIn: false
     }
   }),
-  on(refreshSuccess, (state, jwtResponse) => {
+  on(AuthActions.refreshSuccess, (state, jwtResponse) => {
     return {
       ...state,
       token: jwtResponse.access_token,
@@ -41,9 +41,26 @@ export const authReducer = createReducer(
       isLoggedIn: true
     }
   }),
-  on(refreshFailure, (state, jwtResponse) => {
+  on(AuthActions.refreshFailure, (state, jwtResponse) => {
     return {
       ...state,
+      token: null,
+      user: null,
+      isLoggedIn: false
+    }
+  }),
+  on(AuthActions.signupSuccess, (state, jwtResponse) => {
+    return {
+      ...state,
+      token: jwtResponse.access_token,
+      user: jwtResponse.user,
+      isLoggedIn: true
+    }
+  }),
+  on(AuthActions.signupFailure, (state, jwtResponse) => {
+    return {
+      ...state,
+      loginError: jwtResponse.error,
       token: null,
       user: null,
       isLoggedIn: false
