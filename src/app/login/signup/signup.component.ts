@@ -18,7 +18,8 @@ export class SignupComponent implements OnDestroy, OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private store: Store,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) { }
 
   private subscription: Subscription | null = null;
@@ -60,6 +61,8 @@ export class SignupComponent implements OnDestroy, OnInit {
   public handleSubmit(): void {
     if (this.signupData.valid) {
       this.store.dispatch(AuthActions.signupRequest(this.signupData.value as User));
+    } else {
+      this.notificationService.warn('Please fix any errors to continue signing up!');
     }
   }
 }
