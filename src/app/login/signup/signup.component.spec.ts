@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store } from '@ngrx/store';
-import { User } from 'src/app/common/types/user';
-import { NotificationService } from 'src/app/common/util/notification.service';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {Store} from '@ngrx/store';
+import {User} from 'src/app/common/types/user';
+import {NotificationService} from 'src/app/common/util/notification.service';
 import * as AuthActions from '../../common/state/auth/auth.actions';
-import { SignupComponent } from './signup.component';
+import {SignupComponent} from './signup.component';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -18,10 +18,9 @@ describe('SignupComponent', () => {
       declarations: [SignupComponent],
       providers: [
         {provide: Store, useValue: mockStore},
-        {provide: NotificationService, useValue: mockNotificationService}
-      ]
-    })
-    .compileComponents();
+        {provide: NotificationService, useValue: mockNotificationService},
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SignupComponent);
     component = fixture.componentInstance;

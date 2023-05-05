@@ -1,22 +1,21 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { UserServerAdapterService } from '../common/server-adapters/user-server-adapter.service';
-import { LoginDto } from '../common/types/user';
-import { NotificationService } from '../common/util/notification.service';
+import {Component} from '@angular/core';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {Store} from '@ngrx/store';
+import {LoginDto} from '../common/types/user';
+import {NotificationService} from '../common/util/notification.service';
 import * as AuthActions from '../common/state/auth/auth.actions';
 
 @Component({
   selector: 'rspui-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  hidePass: boolean = true;
+  public hidePass = true;
   constructor(
     private formBuilder: FormBuilder,
     private notificationService: NotificationService,
-    private store: Store
+    private store: Store,
   ) {}
 
   public usernameControl = new FormControl('', [Validators.required]);
@@ -24,10 +23,10 @@ export class LoginComponent {
 
   public loginData = this.formBuilder.group({
     username: this.usernameControl,
-    password: this.passwordControl
+    password: this.passwordControl,
   });
 
-  handleLoginSubmit() {
+  public handleLoginSubmit(): void {
     if (this.loginData.valid) {
       this.store.dispatch(AuthActions.loginRequest(this.loginData.value as LoginDto));
     } else {
@@ -35,7 +34,7 @@ export class LoginComponent {
     }
   }
 
-  toggleHidePass() {
+  public toggleHidePass(): void {
     this.hidePass = !this.hidePass;
   }
 }

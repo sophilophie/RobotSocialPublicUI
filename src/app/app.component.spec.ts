@@ -1,9 +1,8 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Store } from '@ngrx/store';
-import { AppComponent } from './app.component';
+import {TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {Store} from '@ngrx/store';
+import {AppComponent} from './app.component';
 import * as AuthActions from './common/state/auth/auth.actions';
-import { LoginDto } from './common/types/user';
 
 describe('AppComponent', () => {
   let mockStore: Store;
@@ -12,19 +11,19 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [AppComponent],
-      providers: [{ provide: Store, useValue: mockStore }]
+      providers: [{provide: Store, useValue: mockStore}],
     }).compileComponents();
   });
 
-  function initComponent() {
+  function initComponent(): {fixture: any; component: any} {
     const fixture = TestBed.createComponent(AppComponent);
     const component = fixture.componentInstance;
     fixture.detectChanges();
-    return { fixture, component };
+    return {fixture, component};
   }
 
   it('should create the app', () => {
-    const { component } = initComponent();
+    const {component} = initComponent();
     expect(component instanceof AppComponent).toBe(true);
   });
 
@@ -38,5 +37,5 @@ describe('AppComponent', () => {
     spyOn(localStorage, 'getItem').and.returnValue('TEST_TOKEN');
     initComponent();
     expect(mockStore.dispatch).toHaveBeenCalledOnceWith(AuthActions.refreshRequest({access_token: 'TEST_TOKEN'}));
-  })
+  });
 });
