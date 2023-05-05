@@ -6,16 +6,15 @@
   </mat-card-header>
   <mat-card-content>
     <mat-divider></mat-divider>
-    <br>
+    <br />
     <p>
-      In order to sign up, please enter your information below. I don't track
-      you or use your information for any purpose, so feel free to put in fake
-      information. That being said, this site has high standards for security.
+      In order to sign up, please enter your information below. I don't track you or use your information for any
+      purpose, so feel free to put in fake information. That being said, this site has high standards for security.
     </p>
-    <br>
+    <br />
     <mat-divider></mat-divider>
   </mat-card-content>
-  <br>
+  <br />
   <form [formGroup]="signupData">
     <mat-card-content class="form-content">
       <mat-form-field appearance="outline">
@@ -23,7 +22,7 @@
         <input
           type="text"
           matInput
-          [formControl]="firstNameFormControl">
+          [formControl]="firstNameFormControl" />
         <mat-error *ngIf="firstNameFormControl.hasError('required')">
           First name is <strong>required</strong>
         </mat-error>
@@ -33,20 +32,16 @@
         <input
           type="text"
           matInput
-          [formControl]="lastNameFormControl">
-        <mat-error *ngIf="lastNameFormControl.hasError('required')">
-          Last name is <strong>required</strong>
-        </mat-error>
+          [formControl]="lastNameFormControl" />
+        <mat-error *ngIf="lastNameFormControl.hasError('required')"> Last name is <strong>required</strong> </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input
           type="email"
           matInput
-          [formControl]="emailFormControl">
-        <mat-error *ngIf="emailFormControl.hasError('required')">
-          Email is <strong>required</strong>
-        </mat-error>
+          [formControl]="emailFormControl" />
+        <mat-error *ngIf="emailFormControl.hasError('required')"> Email is <strong>required</strong> </mat-error>
         <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
           Please enter a valid email address
         </mat-error>
@@ -56,11 +51,12 @@
         <input
           type="text"
           matInput
-          [formControl]="usernameFormControl">
-        <mat-error *ngIf="usernameFormControl.hasError('required')">
-          Username is <strong>required</strong>
-        </mat-error>
-        <mat-error *ngIf="usernameFormControl.errors && usernameFormControl.invalid && !usernameFormControl.hasError('required')">
+          [formControl]="usernameFormControl" />
+        <mat-error *ngIf="usernameFormControl.hasError('required')"> Username is <strong>required</strong> </mat-error>
+        <mat-error
+          *ngIf="
+            usernameFormControl.errors && usernameFormControl.invalid && !usernameFormControl.hasError('required')
+          ">
           Username must be between <strong>8</strong> and <strong>32</strong> characters
         </mat-error>
       </mat-form-field>
@@ -70,16 +66,21 @@
           matInput
           [type]="hidePass ? 'password' : 'text'"
           placeholder="Your Password"
-          [formControl]="passwordFormControl">
-        <button mat-icon-button matSuffix type="button" (click)="hidePass = !hidePass">
-          <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+          [formControl]="passwordFormControl" />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hidePass = !hidePass">
+          <mat-icon>{{ hidePass ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
-        <mat-error *ngIf="passwordFormControl.errors && passwordFormControl.invalid && !passwordFormControl.hasError('required')">
+        <mat-error
+          *ngIf="
+            passwordFormControl.errors && passwordFormControl.invalid && !passwordFormControl.hasError('required')
+          ">
           Password must be between <strong>8</strong> and <strong>32</strong> characters
         </mat-error>
-        <mat-error *ngIf="passwordFormControl.hasError('required')">
-          Password is <strong>required</strong>
-        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('required')"> Password is <strong>required</strong> </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Confirm Password</mat-label>
@@ -87,27 +88,38 @@
           matInput
           [type]="hidePass ? 'password' : 'text'"
           placeholder="Your Password"
-          [formControl]="confirmPasswordFormControl">
-        <button mat-icon-button matSuffix type="button" (click)="hidePass = !hidePass">
-          <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+          [formControl]="confirmPasswordFormControl" />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hidePass = !hidePass">
+          <mat-icon>{{ hidePass ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>
-        <mat-error *ngIf="confirmPasswordFormControl.hasError('matching')">
-          Passwords must match
-        </mat-error>
-        <mat-error *ngIf="!confirmPasswordFormControl.hasError('matching') && confirmPasswordFormControl.errors && confirmPasswordFormControl.invalid && !confirmPasswordFormControl.hasError('required')">
+        <mat-error *ngIf="confirmPasswordFormControl.hasError('matching')"> Passwords must match </mat-error>
+        <mat-error
+          *ngIf="
+            !confirmPasswordFormControl.hasError('matching') &&
+            confirmPasswordFormControl.errors &&
+            confirmPasswordFormControl.invalid &&
+            !confirmPasswordFormControl.hasError('required')
+          ">
           Password must be between <strong>8</strong> and <strong>32</strong> characters
         </mat-error>
-        <mat-error *ngIf="!confirmPasswordFormControl.hasError('matching') && confirmPasswordFormControl.hasError('required')">
+        <mat-error
+          *ngIf="!confirmPasswordFormControl.hasError('matching') && confirmPasswordFormControl.hasError('required')">
           Password is <strong>required</strong>
         </mat-error>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
       <button
-      mat-stroked-button
-      color="accent"
-      type="submit"
-      (click)="handleSubmit()">Submit</button>
+        mat-stroked-button
+        color="accent"
+        type="submit"
+        (click)="handleSubmit()">
+        Submit
+      </button>
     </mat-card-actions>
   </form>
 </mat-card>

@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
+import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 export class CustomValidators {
   static match(matchTo: string, reverse?: boolean): ValidatorFn {
@@ -10,8 +10,11 @@ export class CustomValidators {
         }
         return null;
       }
-      return !!control.parent && !!control.parent.value &&
-        control.value === (control.parent?.controls as any)[matchTo]?.value ? null : { matching: true };
+      return !!control.parent &&
+        !!control.parent.value &&
+        control.value === (control.parent?.controls as any)[matchTo]?.value
+        ? null
+        : {matching: true};
     };
   }
 }

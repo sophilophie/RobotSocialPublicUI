@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
 import * as AuthActions from './common/state/auth/auth.actions';
 
 @Component({
-  selector: 'app-root',
+  selector: 'rspui-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
   constructor(private store: Store) {}
 
   ngOnInit(): void {

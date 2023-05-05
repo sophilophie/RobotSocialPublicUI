@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store } from '@ngrx/store';
-import { HomeComponent } from './home.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {Store} from '@ngrx/store';
+import {HomeComponent} from './home.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -11,11 +11,16 @@ describe('HomeComponent', () => {
     mockStore = jasmine.createSpyObj('store', ['select']);
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      providers: [{ provide: Store, useValue: mockStore }]
-    })
-    .compileComponents();
+      providers: [{provide: Store, useValue: mockStore}],
+    }).compileComponents();
 
-    mockStore.select.and.returnValue({subscribe: () => ({unsubscribe: () => {}})})
+    mockStore.select.and.returnValue({
+      subscribe: () => ({
+        unsubscribe: () => {
+          return;
+        },
+      }),
+    });
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;

@@ -1,6 +1,6 @@
-import { createReducer, on } from "@ngrx/store";
-import { User } from "../../types/user";
-import * as AuthActions from "./auth.actions";
+import {createReducer, on} from '@ngrx/store';
+import {User} from '../../types/user';
+import * as AuthActions from './auth.actions';
 
 export interface AuthState {
   access_token: string | null;
@@ -12,7 +12,7 @@ export const initialState: AuthState = {
   access_token: null,
   user: null,
   isLoggedIn: false,
-}
+};
 
 export const authReducer = createReducer(
   initialState,
@@ -21,8 +21,8 @@ export const authReducer = createReducer(
       ...state,
       token: jwtResponse.access_token,
       user: jwtResponse.user,
-      isLoggedIn: true
-    }
+      isLoggedIn: true,
+    };
   }),
   on(AuthActions.loginFailure, (state, jwtResponse) => {
     return {
@@ -30,32 +30,32 @@ export const authReducer = createReducer(
       loginError: jwtResponse.error,
       token: null,
       user: null,
-      isLoggedIn: false
-    }
+      isLoggedIn: false,
+    };
   }),
   on(AuthActions.refreshSuccess, (state, jwtResponse) => {
     return {
       ...state,
       token: jwtResponse.access_token,
       user: jwtResponse.user,
-      isLoggedIn: true
-    }
+      isLoggedIn: true,
+    };
   }),
-  on(AuthActions.refreshFailure, (state, jwtResponse) => {
+  on(AuthActions.refreshFailure, (state) => {
     return {
       ...state,
       token: null,
       user: null,
-      isLoggedIn: false
-    }
+      isLoggedIn: false,
+    };
   }),
   on(AuthActions.signupSuccess, (state, jwtResponse) => {
     return {
       ...state,
       token: jwtResponse.access_token,
       user: jwtResponse.user,
-      isLoggedIn: true
-    }
+      isLoggedIn: true,
+    };
   }),
   on(AuthActions.signupFailure, (state, jwtResponse) => {
     return {
@@ -63,7 +63,7 @@ export const authReducer = createReducer(
       loginError: jwtResponse.error,
       token: null,
       user: null,
-      isLoggedIn: false
-    }
-  })
-)
+      isLoggedIn: false,
+    };
+  }),
+);
