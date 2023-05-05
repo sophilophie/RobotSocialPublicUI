@@ -5,7 +5,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class NotificationService {
   constructor(private matSnackBar: MatSnackBar) {}
 
-  success(text: string) {
+  public success(text: string): void {
     this.matSnackBar.open(text, '', {
       horizontalPosition: 'right',
       verticalPosition: 'top',
@@ -14,7 +14,7 @@ export class NotificationService {
     });
   }
 
-  error(text: string) {
+  public error(text: string): void {
     this.matSnackBar.open(text, '', {
       horizontalPosition: 'right',
       verticalPosition: 'top',
@@ -23,7 +23,7 @@ export class NotificationService {
     });
   }
 
-  warn(text: string) {
+  public warn(text: string): void {
     this.matSnackBar.open(text, '', {
       horizontalPosition: 'right',
       verticalPosition: 'top',

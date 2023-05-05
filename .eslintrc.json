@@ -31,7 +31,20 @@
             "prefix": "rspui",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/explicit-function-return-type": "error",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error",
+          {
+            "overrides": {
+            "constructors": "implicit"
+            }
+          }
+        ],
+        "@typescript-eslint/no-this-alias": "error",
+        "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/prefer-as-const": "error",
+        "@typescript-eslint/prefer-function-type": "error"
       }
     },
     {

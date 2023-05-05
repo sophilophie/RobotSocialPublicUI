@@ -7,15 +7,15 @@ import {LoginDto, JwtReponse, User, JwtDto} from '../types/user';
 export class UserServerAdapterService {
   constructor(private httpClient: HttpClient) {}
 
-  postUser(user: User): Observable<JwtReponse> {
+  public postUser(user: User): Observable<JwtReponse> {
     return this.httpClient.post<JwtReponse>('http://localhost:3000/users', user);
   }
 
-  postSession(loginDto: LoginDto): Observable<JwtReponse> {
+  public postSession(loginDto: LoginDto): Observable<JwtReponse> {
     return this.httpClient.post<JwtReponse>('http://localhost:3000/auth/login', loginDto);
   }
 
-  postRefreshSession(jwtDto: JwtDto): Observable<JwtReponse> {
+  public postRefreshSession(jwtDto: JwtDto): Observable<JwtReponse> {
     return this.httpClient.post<JwtReponse>('http://localhost:3000/auth/refresh', jwtDto);
   }
 }

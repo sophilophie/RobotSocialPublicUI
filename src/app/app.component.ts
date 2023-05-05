@@ -10,7 +10,7 @@ import * as AuthActions from './common/state/auth/auth.actions';
 export class AppComponent implements OnInit {
   constructor(private store: Store) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     const accessToken = localStorage.getItem('access_token');
     if (accessToken) {
       this.store.dispatch(AuthActions.refreshRequest({access_token: accessToken}));

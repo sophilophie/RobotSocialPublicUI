@@ -11,7 +11,7 @@ import * as AuthActions from '../common/state/auth/auth.actions';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  hidePass = true;
+  public hidePass = true;
   constructor(
     private formBuilder: FormBuilder,
     private notificationService: NotificationService,
@@ -26,7 +26,7 @@ export class LoginComponent {
     password: this.passwordControl,
   });
 
-  handleLoginSubmit() {
+  public handleLoginSubmit(): void {
     if (this.loginData.valid) {
       this.store.dispatch(AuthActions.loginRequest(this.loginData.value as LoginDto));
     } else {
@@ -34,7 +34,7 @@ export class LoginComponent {
     }
   }
 
-  toggleHidePass() {
+  public toggleHidePass(): void {
     this.hidePass = !this.hidePass;
   }
 }

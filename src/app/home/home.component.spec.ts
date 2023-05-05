@@ -16,7 +16,7 @@ describe('HomeComponent', () => {
 
     mockStore.select.and.returnValue({
       subscribe: () => ({
-        unsubscribe: () => {
+        unsubscribe: (): void => {
           return;
         },
       }),

@@ -15,7 +15,7 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
-  function initComponent() {
+  function initComponent(): {fixture: any; component: any} {
     const fixture = TestBed.createComponent(AppComponent);
     const component = fixture.componentInstance;
     fixture.detectChanges();

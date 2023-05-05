@@ -55,14 +55,14 @@ export class SignupComponent implements OnDestroy, OnInit {
     confirmPassword: this.confirmPasswordFormControl,
   });
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.subscription = this.signupData.controls.password.valueChanges.subscribe(() => {
       this.signupData.controls.confirmPassword.updateValueAndValidity();
     });
     if (localStorage.getItem('access_token')) this.router.navigate(['/']);
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
 
