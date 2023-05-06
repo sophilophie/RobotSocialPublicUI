@@ -8,6 +8,8 @@ export const loginSuccess = createAction('[AUTH] Login Success', props<JwtRepons
 
 export const loginFailure = createAction('[AUTH] Login Failure', props<JwtReponse>());
 
+export const logout = createAction('[AUTH] Logout');
+
 export const refreshRequest = createAction('[AUTH] Refresh Request', props<JwtDto>());
 
 export const refreshSuccess = createAction('[AUTH] Refresh Success', props<JwtReponse>());

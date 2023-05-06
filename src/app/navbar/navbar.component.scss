@@ -1,0 +1,22 @@
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: 'Play', 'Roboto', sans-serif;
+  font-size: 32px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  mat-icon {
+    cursor: pointer;
+  }
+}
