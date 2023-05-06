@@ -33,6 +33,14 @@ export const authReducer = createReducer(
       isLoggedIn: false,
     };
   }),
+  on(AuthActions.logout, (state) => {
+    return {
+      ...state,
+      token: null,
+      user: null,
+      isLoggedIn: false,
+    };
+  }),
   on(AuthActions.refreshSuccess, (state, jwtResponse) => {
     return {
       ...state,

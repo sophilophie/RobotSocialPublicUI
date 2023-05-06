@@ -1,0 +1,17 @@
+<mat-toolbar
+  color="primary"
+  class="mat-elevation-z6">
+  <a
+    routerLink="/"
+    class="logo"
+    >RobotSocial</a
+  >
+  <div class="nav-icons">
+    <mat-icon
+      *ngIf="isLoggedIn"
+      (click)="handleLogout()"
+      matTooltip="Logout"
+      >exit_to_app</mat-icon
+    >
+  </div>
+</mat-toolbar>

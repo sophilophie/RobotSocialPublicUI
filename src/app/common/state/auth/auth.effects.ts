@@ -50,6 +50,18 @@ export class AuthEffects {
     {dispatch: false},
   );
 
+  public logout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.logout),
+        tap(() => {
+          localStorage.removeItem('access_token');
+          this.notificationService.success('Successfully logged out!');
+        }),
+      ),
+    {dispatch: false},
+  );
+
   public refreshRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.refreshRequest),
