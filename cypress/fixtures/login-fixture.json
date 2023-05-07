@@ -1,0 +1,9 @@
+{
+  "session_token": "NEW_TOKEN",
+  "user": {
+    "username": "e2eUserName",
+    "firstName": "e2e",
+    "lastName": "user",
+    "email": "e2euser@test.com"
+  }
+}

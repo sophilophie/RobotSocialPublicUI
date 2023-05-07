@@ -20,6 +20,7 @@
       <mat-form-field appearance="outline">
         <mat-label>First Name</mat-label>
         <input
+          class="first-name-input"
           type="text"
           matInput
           [formControl]="firstNameFormControl" />
@@ -30,6 +31,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Last Name</mat-label>
         <input
+          class="last-name-input"
           type="text"
           matInput
           [formControl]="lastNameFormControl" />
@@ -38,6 +40,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input
+          class="email-input"
           type="email"
           matInput
           [formControl]="emailFormControl" />
@@ -49,6 +52,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
         <input
+          class="username-input"
           type="text"
           matInput
           [formControl]="usernameFormControl" />
@@ -63,6 +67,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
         <input
+          class="password-input"
           matInput
           [type]="hidePass ? 'password' : 'text'"
           placeholder="Your Password"
@@ -85,6 +90,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Confirm Password</mat-label>
         <input
+          class="confirm-password-input"
           matInput
           [type]="hidePass ? 'password' : 'text'"
           placeholder="Your Password"
@@ -114,6 +120,7 @@
     </mat-card-content>
     <mat-card-actions>
       <button
+        class="submit-button"
         mat-stroked-button
         color="accent"
         type="submit"
