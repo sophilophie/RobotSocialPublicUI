@@ -25,6 +25,7 @@
         <input
           matInput
           placeholder="Your Username"
+          class="username-input"
           [formControl]="usernameControl" />
       </mat-form-field>
       <mat-form-field appearance="outline">
@@ -33,6 +34,7 @@
           matInput
           [type]="hidePass ? 'password' : 'text'"
           placeholder="Your Password"
+          class="password-input"
           [formControl]="passwordControl" />
         <button
           mat-icon-button
@@ -46,6 +48,7 @@
     <p>Don't have an account? <a routerLink="/sign-up">Sign up</a></p>
     <mat-card-actions>
       <button
+        class="submit-button"
         mat-stroked-button
         color="accent"
         (click)="handleLoginSubmit()"
