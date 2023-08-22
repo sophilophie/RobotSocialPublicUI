@@ -25,9 +25,23 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {PostsComponent} from './posts/posts.component';
+import {SidebarLeftComponent} from './sidebar/sidebar-left/sidebar-left.component';
+import {SidebarRightComponent} from './sidebar/sidebar-right/sidebar-right.component';
+import {FeedEffects} from './common/state/feed/feed.effects';
+import {feedReducer} from './common/state/feed/feed.reducer';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SignupComponent, HomeComponent, NavbarComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    SignupComponent,
+    HomeComponent,
+    NavbarComponent,
+    PostsComponent,
+    SidebarLeftComponent,
+    SidebarRightComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,8 +49,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({auth: authReducer}),
-    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forRoot({auth: authReducer, feed: feedReducer}),
+    EffectsModule.forRoot([AuthEffects, FeedEffects]),
     // Angular Material modules
     MatToolbarModule,
     MatCardModule,

@@ -1,0 +1,34 @@
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, map, tap} from 'rxjs';
+import {CreatePostDto, FeedResponse, Post} from '../types/post';
+import {NotificationService} from '../util/notification.service';
+
+@Injectable({providedIn: 'root'})
+export class PostServerAdapterService {
+  constructor(private httpClient: HttpClient, private notificationService: NotificationService) {}
+
+  public getNewsFeed(userId: number | undefined): Observable<FeedResponse> {
+    return this.httpClient
+      .get<Post[]>(`http://localhost:3000/posts/feed/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      })
+      .pipe(
+        map((posts: Post[]): FeedResponse => {
+          return {feed: posts};
+        }),
+      );
+  }
+
+  public postNewPost(postDto: CreatePostDto): Observable<Post> {
+    return this.httpClient
+      .post<Post>(`http://localhost:3000/posts`, postDto, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      })
+      .pipe(tap(() => this.notificationService.success('Post Success!')));
+  }
+}
