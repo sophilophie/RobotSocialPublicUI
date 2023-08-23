@@ -2,3 +2,8 @@
   min-height: 100%;
   height: auto;
 }
+
+.rspui-column-layout {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr;
+}

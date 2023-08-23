@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {Store} from '@ngrx/store';
 import * as AuthActions from '../common/state/auth/auth.actions';
 import {NavbarComponent} from './navbar.component';
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -12,6 +13,7 @@ describe('NavbarComponent', () => {
     mockStore = jasmine.createSpyObj(Store, ['select', 'dispatch']);
     await TestBed.configureTestingModule({
       declarations: [NavbarComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
       providers: [{provide: Store, useValue: mockStore}],
     }).compileComponents();
 

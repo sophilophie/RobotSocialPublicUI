@@ -1,5 +1,33 @@
-<rspui-login *ngIf="!isLoggedIn"></rspui-login>
+<h1>What's on your mind, {{ user?.firstName }}?</h1>
 
-<div *ngIf="isLoggedIn">
-  <h1>Welcome {{ user?.firstName }}</h1>
-</div>
+<mat-form-field class="rspui-post-input">
+  <mat-label>Post</mat-label>
+  <textarea
+    #postInput
+    matInput
+    (keydown.enter)="createPost()"
+    (input)="evaluateHeight()"
+    rows="1"
+    maxlength="255"></textarea>
+  <button
+    matSuffix
+    mat-icon-button
+    matTooltip="Create Post"
+    (click)="createPost()">
+    <mat-icon>done_outline</mat-icon>
+  </button>
+  <mat-hint align="end">{{ postInput.value.length }} / 255</mat-hint>
+</mat-form-field>
+
+<mat-card
+  *ngFor="let post of newsFeed"
+  class="rspui-feed-item">
+  <mat-card-header>
+    <mat-card-subtitle class="rspui-time-posted">Posted {{ getPostTimeText(post.timePosted) }}</mat-card-subtitle>
+    <mat-card-title class="rspui-feed-heading">{{ post?.user?.username }}</mat-card-title>
+  </mat-card-header>
+  <br />
+  <mat-card-content class="rspui-feed-content">
+    <p>{{ post.content }}</p>
+  </mat-card-content>
+</mat-card>

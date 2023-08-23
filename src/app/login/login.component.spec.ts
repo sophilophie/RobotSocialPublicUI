@@ -3,6 +3,7 @@ import {Store} from '@ngrx/store';
 import {NotificationService} from '../common/util/notification.service';
 import {LoginComponent} from './login.component';
 import * as AuthActions from '../common/state/auth/auth.actions';
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -14,6 +15,7 @@ describe('LoginComponent', () => {
     mockNotificationService = jasmine.createSpyObj('notificationService', ['warn']);
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
       providers: [
         {provide: Store, useValue: mockStore},
         {provide: NotificationService, useValue: mockNotificationService},

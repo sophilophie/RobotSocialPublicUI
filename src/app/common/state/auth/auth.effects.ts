@@ -1,16 +1,21 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {catchError, exhaustMap, ObservableInput, map, tap, of} from 'rxjs';
+import {catchError, exhaustMap, ObservableInput, map, tap, of, concatMap} from 'rxjs';
 import {UserServerAdapterService} from '../../server-adapters/user-server-adapter.service';
 import {NotificationService} from '../../util/notification.service';
+import {PostServerAdapterService} from '../../server-adapters/post-server-adapter.service';
 import * as AuthActions from './auth.actions';
+import * as FeedActions from '../feed/feed.actions';
+import {Store} from '@ngrx/store';
 
 @Injectable()
 export class AuthEffects {
   constructor(
     private actions$: Actions,
+    private store: Store,
     private userServerAdapterService: UserServerAdapterService,
+    private postServerAdapterService: PostServerAdapterService,
     private notificationService: NotificationService,
     private router: Router,
   ) {}
@@ -27,16 +32,21 @@ export class AuthEffects {
     ),
   );
 
-  public loginSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.loginSuccess),
-        tap((response) => {
-          localStorage.setItem('access_token', response.access_token as string);
-          this.notificationService.success('Login Successful!');
-        }),
-      ),
-    {dispatch: false},
+  public loginSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginSuccess),
+      tap((response) => {
+        localStorage.setItem('access_token', response.access_token as string);
+        this.router.navigate(['/']);
+        this.notificationService.success('Login Successful!');
+      }),
+      exhaustMap((action) => {
+        return this.postServerAdapterService.getNewsFeed(action?.user?.id).pipe(
+          map((response) => FeedActions.newsFeedSuccess(response)),
+          catchError((error) => of(FeedActions.newsFeedFailure(error))),
+        );
+      }),
+    ),
   );
 
   public loginFailure$ = createEffect(
@@ -56,6 +66,7 @@ export class AuthEffects {
         ofType(AuthActions.logout),
         tap(() => {
           localStorage.removeItem('access_token');
+          this.router.navigate(['/login']);
           this.notificationService.success('Successfully logged out!');
         }),
       ),
@@ -65,12 +76,9 @@ export class AuthEffects {
   public refreshRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.refreshRequest),
-      exhaustMap((action): ObservableInput<any> => {
-        return this.userServerAdapterService.postRefreshSession(action).pipe(
-          map((response) => AuthActions.refreshSuccess(response)),
-          catchError((error) => of(AuthActions.refreshFailure(error))),
-        );
-      }),
+      concatMap((action): ObservableInput<any> => this.userServerAdapterService.postRefreshSession(action)),
+      concatMap((response) => [AuthActions.refreshSuccess(response), FeedActions.newsFeedRequest(response.user)]),
+      catchError((error) => of(AuthActions.refreshFailure(error))),
     ),
   );
 
@@ -80,6 +88,7 @@ export class AuthEffects {
         ofType(AuthActions.refreshSuccess),
         tap((response) => {
           localStorage.setItem('access_token', response.access_token as string);
+          this.router.navigate(['/']);
           this.notificationService.success('Welcome Back!');
         }),
       ),

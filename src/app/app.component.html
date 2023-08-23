@@ -1,4 +1,18 @@
 <div class="mat-app-background rspui-background">
   <rspui-navbar></rspui-navbar>
-  <router-outlet></router-outlet>
+  <div [ngClass]="{'rspui-column-layout': isLoggedIn}">
+    <div
+      *ngIf="isLoggedIn"
+      class="rspui-sidebar-left-container">
+      <rspui-sidebar-left [user]="user"></rspui-sidebar-left>
+    </div>
+    <div class="rspui-main-content">
+      <router-outlet></router-outlet>
+    </div>
+    <div
+      *ngIf="isLoggedIn"
+      class="rspui-sidebar-right-container">
+      <rspui-sidebar-right [user]="user"></rspui-sidebar-right>
+    </div>
+  </div>
 </div>
