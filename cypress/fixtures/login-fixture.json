@@ -1,9 +1,12 @@
 {
   "session_token": "NEW_TOKEN",
   "user": {
+    "id": 0,
     "username": "e2eUserName",
     "firstName": "e2e",
     "lastName": "user",
-    "email": "e2euser@test.com"
+    "email": "e2euser@test.com",
+    "friendRequests": [],
+    "requestsReceived": []
   }
 }

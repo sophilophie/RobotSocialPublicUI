@@ -3,16 +3,21 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {Store} from '@ngrx/store';
 import {AppComponent} from './app.component';
 import * as AuthActions from './common/state/auth/auth.actions';
+import {of} from 'rxjs';
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('AppComponent', () => {
-  let mockStore: Store;
+  let mockStore: any;
   beforeEach(async () => {
-    mockStore = jasmine.createSpyObj('store', ['dispatch']);
+    mockStore = jasmine.createSpyObj('store', ['dispatch', 'select']);
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
       declarations: [AppComponent],
       providers: [{provide: Store, useValue: mockStore}],
     }).compileComponents();
+
+    mockStore.select.and.returnValue(of());
   });
 
   function initComponent(): {fixture: any; component: any} {
@@ -38,4 +43,9 @@ describe('AppComponent', () => {
     initComponent();
     expect(mockStore.dispatch).toHaveBeenCalledOnceWith(AuthActions.refreshRequest({access_token: 'TEST_TOKEN'}));
   });
+
+  it('should subscribe to auth events from the store', () => {
+    initComponent();
+    expect(mockStore.select).toHaveBeenCalled();
+  })
 });

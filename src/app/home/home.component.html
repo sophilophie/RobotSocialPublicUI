@@ -2,10 +2,13 @@
 
 <mat-form-field class="rspui-post-input">
   <mat-label>Post</mat-label>
-  <input
+  <textarea
     #postInput
     matInput
-    (keydown.enter)="createPost()" />
+    (keydown.enter)="createPost()"
+    (input)="evaluateHeight()"
+    rows="1"
+    maxlength="255"></textarea>
   <button
     matSuffix
     mat-icon-button
@@ -13,6 +16,7 @@
     (click)="createPost()">
     <mat-icon>done_outline</mat-icon>
   </button>
+  <mat-hint align="end">{{ postInput.value.length }} / 255</mat-hint>
 </mat-form-field>
 
 <mat-card

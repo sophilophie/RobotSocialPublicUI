@@ -58,6 +58,16 @@ export class HomeComponent implements OnDestroy, OnInit {
     };
     this.postServerAdapterService.postNewPost(postDto).subscribe(() => {
       if (this.user) this.store.dispatch(FeedActions.newsFeedRequest(this.user));
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      this.postInput!.nativeElement.value = '';
+      this.evaluateHeight();
     });
+  }
+
+  public evaluateHeight(): void {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.postInput!.nativeElement.style.height = 'auto';
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.postInput!.nativeElement.style.height = `${this.postInput?.nativeElement.scrollHeight}px`;
   }
 }

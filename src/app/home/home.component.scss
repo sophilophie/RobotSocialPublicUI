@@ -4,6 +4,9 @@ h1 {
 
 .rspui-post-input {
   width: 100%;
+  textarea {
+    resize: none;
+  }
 }
 
 .rspui-feed-item {

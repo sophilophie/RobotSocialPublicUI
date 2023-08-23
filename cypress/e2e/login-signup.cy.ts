@@ -1,4 +1,4 @@
-describe('app.component.ts', () => {
+describe('Login and Signup (e2e)', () => {
   beforeEach(() => cy.visit('localhost:4200'));
 
   context('login', () => {
@@ -96,7 +96,7 @@ describe('app.component.ts', () => {
       cy.get('.password-input').type('password', {force: true});
       cy.get('.confirm-password-input').type('password', {force: true});
       cy.get('.submit-button').click();
-      cy.get('h1').should('contain.text', 'Welcome e2e');
+      cy.get('h1').should('contain.text', "What's on your mind, e2e?");
     });
   });
 });

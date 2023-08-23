@@ -1,4 +1,4 @@
-describe('app.component.ts', () => {
+describe('Root (e2e)', () => {
   before(() => {
     cy.visit('localhost:4200');
   });
