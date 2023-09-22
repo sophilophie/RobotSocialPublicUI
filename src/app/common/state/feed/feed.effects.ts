@@ -18,9 +18,7 @@ export class FeedEffects {
       ofType(FeedActions.newsFeedRequest),
       exhaustMap((user): ObservableInput<any> => {
         return this.postServerAdapterService.getNewsFeed(user?.id).pipe(
-          map((response) => {
-            return FeedActions.newsFeedSuccess(response);
-          }),
+          map((response) => FeedActions.newsFeedSuccess(response)),
           catchError((error) => of(FeedActions.newsFeedFailure(error))),
         );
       }),
@@ -31,12 +29,27 @@ export class FeedEffects {
     () =>
       this.actions$.pipe(
         ofType(FeedActions.newsFeedFailure),
-        tap(() => {
-          this.notificationService.error('There was an error getting your news feed.');
-        }),
+        tap(() => this.notificationService.error('There was an error getting your news feed.')),
       ),
     {dispatch: false},
   );
 
-  public feedSuccess$ = createEffect(() => this.actions$.pipe(ofType(FeedActions.newsFeedSuccess)), {dispatch: false});
+  public userPostsRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(FeedActions.userPostsRequest),
+      exhaustMap((user): ObservableInput<any> => {
+        return this.postServerAdapterService.getUserPosts(user?.id).pipe(
+          map((response) => FeedActions.userPostsSuccess(response)),
+          catchError((error) => of(FeedActions.userPostsFailure(error))),
+        );
+      }),
+    ),
+  );
+
+  public userPostsFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(FeedActions.userPostsFailure),
+      tap(() => this.notificationService.error('There was an error getting your posts.')),
+    ),
+  );
 }

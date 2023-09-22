@@ -21,3 +21,9 @@ export const signupRequest = createAction('[AUTH] Signup Request', props<User>()
 export const signupSuccess = createAction('[AUTH] Signup Success', props<JwtResponse>());
 
 export const signupFailure = createAction('[AUTH] Signup Failure', props<JwtResponse>());
+
+export const updateUserRequest = createAction('[AUTH] Update User Request', props<User>());
+
+export const updateUserSuccess = createAction('[AUTH] Update User Success', props<User>());
+
+export const updateUserFailure = createAction('[AUTH Update User Failure', props<User>());

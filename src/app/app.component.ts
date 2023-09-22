@@ -5,6 +5,7 @@ import {Observable, Subscription} from 'rxjs';
 import {AuthState} from './common/state/auth/auth.reducer';
 import {AppState} from './common/state/state';
 import {User} from './common/types/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'rspui-root',
@@ -12,7 +13,7 @@ import {User} from './common/types/user';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnDestroy, OnInit {
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   public isLoggedIn = false;
   public user: User | null = null;
@@ -23,6 +24,8 @@ export class AppComponent implements OnDestroy, OnInit {
     const accessToken = localStorage.getItem('access_token');
     if (accessToken) {
       this.store.dispatch(AuthActions.refreshRequest({access_token: accessToken}));
+    } else {
+      this.router.navigate(['/login']);
     }
     this.subscription = this.authState$.subscribe((authState: AuthState) => {
       this.isLoggedIn = authState.isLoggedIn;

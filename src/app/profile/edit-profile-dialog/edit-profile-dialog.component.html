@@ -1,0 +1,66 @@
+<h1 mat-dialog-title>Edit Profile</h1>
+<form [formGroup]="profileData">
+  <div
+    mat-dialog-content
+    class="profile-form">
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input
+        class="first-name-input"
+        type="text"
+        matInput
+        [formControl]="firstNameFormControl" />
+      <mat-error *ngIf="firstNameFormControl.hasError('required')"> First name is <strong>required</strong> </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input
+        class="last-name-input"
+        type="text"
+        matInput
+        [formControl]="lastNameFormControl" />
+      <mat-error *ngIf="lastNameFormControl.hasError('required')"> Last name is <strong>required</strong> </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        class="email-input"
+        type="email"
+        matInput
+        [formControl]="emailFormControl" />
+      <mat-error *ngIf="emailFormControl.hasError('required')"> Email is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input
+        class="username-input"
+        type="text"
+        matInput
+        [formControl]="usernameFormControl" />
+      <mat-error *ngIf="usernameFormControl.hasError('required')"> Username is <strong>required</strong> </mat-error>
+      <mat-error
+        *ngIf="usernameFormControl.errors && usernameFormControl.invalid && !usernameFormControl.hasError('required')">
+        Username must be between <strong>8</strong> and <strong>32</strong> characters
+      </mat-error>
+    </mat-form-field>
+  </div>
+</form>
+<div
+  mat-dialog-actions
+  align="end">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onEditSubmitted()">
+    Submit
+  </button>
+  <button
+    mat-stroked-button
+    color="primary"
+    (click)="onEditCancelled()">
+    Cancel
+  </button>
+</div>

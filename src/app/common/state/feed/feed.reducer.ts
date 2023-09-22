@@ -26,4 +26,16 @@ export const feedReducer = createReducer(
       feed: [],
     };
   }),
+  on(FeedActions.userPostsSuccess, (state, userPosts) => {
+    return {
+      ...state,
+      userPosts: userPosts.posts,
+    };
+  }),
+  on(FeedActions.userPostsFailure, (state) => {
+    return {
+      ...state,
+      userPosts: [],
+    };
+  }),
 );

@@ -74,4 +74,10 @@ export const authReducer = createReducer(
       isLoggedIn: false,
     };
   }),
+  on(AuthActions.updateUserSuccess, (state, user) => {
+    return {
+      ...state,
+      user,
+    };
+  }),
 );

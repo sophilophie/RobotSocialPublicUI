@@ -118,11 +118,12 @@
         </mat-error>
       </mat-form-field>
     </mat-card-content>
-    <mat-card-actions>
+    <p>Already have an account? <a routerLink="/login">Login</a></p>
+    <mat-card-actions align="end">
       <button
         class="submit-button"
-        mat-stroked-button
-        color="accent"
+        mat-raised-button
+        color="primary"
         type="submit"
         (click)="handleSubmit()">
         Submit

@@ -1,0 +1,26 @@
+.rspui-header-container {
+  padding: 3rem;
+  display: flex;
+  align-items: flex-end;
+  img {
+    display: inline;
+    float: left;
+    height: auto;
+    width: 20%;
+    border-radius: 50%;
+  }
+  h1 {
+    font-size: 3rem;
+    margin-left: 3rem;
+    margin-bottom: 0px;
+    line-height: 1;
+  }
+}
+
+.rspui-post-header {
+  margin: 16px;
+}
+
+.rspui-post-item {
+  margin-bottom: 16px;
+}

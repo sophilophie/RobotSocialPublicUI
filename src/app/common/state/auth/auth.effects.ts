@@ -1,19 +1,17 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {catchError, exhaustMap, ObservableInput, map, tap, of, concatMap} from 'rxjs';
+import {catchError, exhaustMap, ObservableInput, map, tap, of, concatMap, forkJoin} from 'rxjs';
 import {UserServerAdapterService} from '../../server-adapters/user-server-adapter.service';
 import {NotificationService} from '../../util/notification.service';
 import {PostServerAdapterService} from '../../server-adapters/post-server-adapter.service';
 import * as AuthActions from './auth.actions';
 import * as FeedActions from '../feed/feed.actions';
-import {Store} from '@ngrx/store';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AuthEffects {
   constructor(
     private actions$: Actions,
-    private store: Store,
     private userServerAdapterService: UserServerAdapterService,
     private postServerAdapterService: PostServerAdapterService,
     private notificationService: NotificationService,
@@ -40,12 +38,10 @@ export class AuthEffects {
         this.router.navigate(['/']);
         this.notificationService.success('Login Successful!');
       }),
-      exhaustMap((action) => {
-        return this.postServerAdapterService.getNewsFeed(action?.user?.id).pipe(
-          map((response) => FeedActions.newsFeedSuccess(response)),
-          catchError((error) => of(FeedActions.newsFeedFailure(error))),
-        );
-      }),
+      concatMap((response) => [
+        FeedActions.newsFeedRequest(response?.user),
+        FeedActions.userPostsRequest(response?.user),
+      ]),
     ),
   );
 
@@ -76,23 +72,28 @@ export class AuthEffects {
   public refreshRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.refreshRequest),
-      concatMap((action): ObservableInput<any> => this.userServerAdapterService.postRefreshSession(action)),
-      concatMap((response) => [AuthActions.refreshSuccess(response), FeedActions.newsFeedRequest(response.user)]),
-      catchError((error) => of(AuthActions.refreshFailure(error))),
+      exhaustMap((action): ObservableInput<any> => {
+        return this.userServerAdapterService.postRefreshSession(action).pipe(
+          map((response) => AuthActions.refreshSuccess(response)),
+          catchError((error) => of(AuthActions.refreshFailure(error))),
+        );
+      }),
     ),
   );
 
-  public refreshSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.refreshSuccess),
-        tap((response) => {
-          localStorage.setItem('access_token', response.access_token as string);
-          this.router.navigate(['/']);
-          this.notificationService.success('Welcome Back!');
-        }),
-      ),
-    {dispatch: false},
+  public refreshSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.refreshSuccess),
+      tap((response) => {
+        localStorage.setItem('access_token', response.access_token as string);
+        if (this.router.url === '/login' || this.router.url === '/sign-up') this.router.navigate(['/']);
+        this.notificationService.success('Welcome Back!');
+      }),
+      concatMap((response) => [
+        FeedActions.newsFeedRequest(response?.user),
+        FeedActions.userPostsRequest(response?.user),
+      ]),
+    ),
   );
 
   public refreshFailure$ = createEffect(
@@ -100,6 +101,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.refreshFailure),
         tap(() => {
+          this.router.navigate(['/login']);
           this.notificationService.error('Something went wrong. Please log in again.');
         }),
       ),
@@ -135,6 +137,41 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.signupFailure),
+        tap((response: any) => {
+          if (response.status === 409) {
+            return this.notificationService.error('Username or email has been taken');
+          }
+          this.notificationService.error('Something went wrong. Please try again.');
+        }),
+      ),
+    {dispatch: false},
+  );
+
+  public updateUserRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.updateUserRequest),
+      exhaustMap((user): ObservableInput<any> => {
+        return this.userServerAdapterService.putUser(user, user.id as number).pipe(
+          map((response) => AuthActions.updateUserSuccess(response)),
+          catchError((error) => of(AuthActions.updateUserFailure(error))),
+        );
+      }),
+    ),
+  );
+
+  public updateUserSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.updateUserSuccess),
+        tap(() => this.notificationService.success('User Updated!')),
+      ),
+    {dispatch: false},
+  );
+
+  public updateUserFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.updateUserFailure),
         tap((response: any) => {
           if (response.status === 409) {
             return this.notificationService.error('Username or email has been taken');

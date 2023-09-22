@@ -1,3 +1,7 @@
-div {
-  text-align: center;
+.rspui-nav-list-container {
+  margin: 5rem 3rem;
+}
+
+.mat-nav-list .mat-list-item:focus {
+  background: transparent !important;
 }
