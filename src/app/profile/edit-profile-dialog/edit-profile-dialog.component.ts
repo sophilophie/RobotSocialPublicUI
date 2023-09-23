@@ -6,6 +6,7 @@ import {User} from 'src/app/common/types/user';
 import * as AuthActions from '../../common/state/auth/auth.actions';
 import {AuthEffects} from 'src/app/common/state/auth/auth.effects';
 import {take} from 'rxjs';
+import {NotificationService} from 'src/app/common/util/notification.service';
 
 export interface DialogData {
   user: User;
@@ -38,6 +39,7 @@ export class EditProfileDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private authEffects: AuthEffects,
     private store: Store,
+    private notificationService: NotificationService,
   ) {}
 
   public ngOnInit(): void {
@@ -52,11 +54,15 @@ export class EditProfileDialogComponent implements OnInit {
   }
 
   public onEditSubmitted(): void {
-    this.authEffects.updateUserSuccess$.pipe(take(1)).subscribe(() => {
-      this.dialogRef.close();
-    });
-    const changedUser = this.profileData.value;
-    changedUser.id = this.data.user.id;
-    this.store.dispatch(AuthActions.updateUserRequest(changedUser));
+    if (this.profileData.valid) {
+      this.authEffects.updateUserSuccess$.pipe(take(1)).subscribe(() => {
+        this.dialogRef.close();
+      });
+      const changedUser = this.profileData.value;
+      changedUser.id = this.data.user.id;
+      this.store.dispatch(AuthActions.updateUserRequest(changedUser));
+    } else {
+      this.notificationService.warn('Cannot update user! Fields have errors.');
+    }
   }
 }

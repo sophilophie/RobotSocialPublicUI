@@ -4,7 +4,6 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, exhaustMap, ObservableInput, map, tap, of, concatMap, forkJoin} from 'rxjs';
 import {UserServerAdapterService} from '../../server-adapters/user-server-adapter.service';
 import {NotificationService} from '../../util/notification.service';
-import {PostServerAdapterService} from '../../server-adapters/post-server-adapter.service';
 import * as AuthActions from './auth.actions';
 import * as FeedActions from '../feed/feed.actions';
 
@@ -13,7 +12,6 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private userServerAdapterService: UserServerAdapterService,
-    private postServerAdapterService: PostServerAdapterService,
     private notificationService: NotificationService,
     private router: Router,
   ) {}
