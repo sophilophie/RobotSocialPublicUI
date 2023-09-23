@@ -1,4 +1,5 @@
 import {FriendRequest} from './friend-request';
+import {Post} from './post';
 
 export interface User {
   id?: number;
@@ -10,6 +11,7 @@ export interface User {
   requestedFriends?: FriendRequest[];
   requestsReceived?: FriendRequest[];
   friends?: User[];
+  posts: Post[];
 }
 
 export interface LoginDto {
@@ -18,11 +20,18 @@ export interface LoginDto {
 }
 
 export interface JwtResponse {
-  access_token: string | null;
-  user: User | null;
-  error?: any | null;
+  access_token: string;
+  user: User;
+  error?: any;
 }
 
 export interface JwtDto {
   access_token: string;
+}
+
+export interface UpdateUserDto {
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
 }

@@ -1,0 +1,31 @@
+I want to set up a new planet with production of Cryonite and Vulcanite for the next two sciences. 
+This planet will require one of those two resources, some way to generate power, hopefully few or no biters to make defense cheap, and either meteor defense or production of machines to repair. But that sucks so meteor defense. 
+This means I need copper, stone, oil, coal, iron, and water. With all of these ingredients, I can make both meteor defence installation ammo and delivery-cannon capsules. Plus I should be able to make power out of any planet with either coal, uranium, oil, or solar panels. 
+
+After that, let's look at module production!Big problem is, a lot of these are considered "resources" or something, and aren't allowing for prod modules? Ex: Fine imersite powder, Imersium sulfide, and the modules themselves. 1 Speed 3 module/secRaw materials needed: (using all Assembler 4s, 173 Green circuit (447 copper wire/sec?!?, and about 210 greeneries w/ speed 1s -.-)An extra 315.6 CW/s (total of 328.6 copper)35 plastic86.4 Electronic parts1.1 vulcanite block44 stone1.1 mineral water (rly)330 petrolSome other 40 solid fuel80 sulfuric acid65.7 iron17.3 rare metal3036 waterAnd finally, 238 Raw imersite, which I don't even have yet. Yikes.Maybe I won't worry about this until after I have a good amount of Vulcanite, since it seems that's a necessary ingredient anyways. Plus, Vulcanite/Cryonite is needed to get the science that allows me to get beacons. I'll look to make these wherever I have a ton of immersite and basic resources. 
+What about prod 3's? Prod 3's are made out of 10 red circuit, 15 blue circuit, 2 p2s, and 50 vulcanite blocks........You're telling me, that I need 50 VULCANITE to make one module?! bruh. That's a full cannon send. That's still a total of 15 blue circuits, 79 red circuits, and 216 green circuits. 
+Efficiency 3s are a bit cheaper, requiring 5 red, 10 blue, 2 e2s, and 30 cryonite rods each. 
+This means I'll need tons of vulcanite for the near future. Let's work on a setup for smelting!// 15 vulcanite block/sec (using all prod 2s) //-80.3 vulcanite/sec16.8 crushers (49.8 dust) +4.2 stone91.1 Centrifuge +6.4 sulfur +1.3 sand
+11.6 Industrial furnace +46.2 steam
+
+Smelting:// Iron /Copper //For smelting, it appears that 1 pipe can of molten iron can support about 60 iron/sec. However, this comes from less than 36 iron ore. We're getting nearly a 2-1 return on iron ore from only prod 1s!
+-35.9 iron/copper ore-water-12.0 sulfuric acid17.1 chem plant for iron enrichment(dirty water recycling needed, 2 filt plants should be good)
+50 Industrial furnace-16.8 pyroflux (2.2 chem plants, 1.5 vulcanite block)+1505 molten iron/copper
+
+150 casting machine -molten iron/copper+Iron/Copper ingot
+
+Transport ingots as needed
+Then break down with 12 assembler 3's for 60 iron plates/sec
+There's a tiny bit of excess in this process, but that's fine. But it seems it's pretty cheap on the vulcanite for how much extra resources it provides. Plus I can use that pyroflux that's been stocked up!
+Just found a HUGE thing. I can do the same thing, but the cost of 2 iron ingots makes 1 steel ingot. That's SO much better than the 3-1 ratio for steel plates. Plus this cuts down on coke, which then uses less stone to make wood. The new recipe will make 60 steel/sec and use a total of 72 iron ore, 2.1 stone, 2.2 sulfur, and 3 vulcanite block/sec. .4 assembler 3 to unpack steel ingots600 casting machines making steel ingots  1.7 advanced furnaces making molten iron    -80 enriched iron ore    0.1 chem plant making pyroflux from blocks and sand  1.0 electric furnace making coke    0.3 greenhouse making fertilized wood      0.1 pulverizer making sand from 2.1 stone/sec      0.1 chem plant making fertilizer        biomatter from bio lab        nitric acid from mineral water, rare metals and ammonia          ammonia from hydrogen (water separation) and nitrogen (atmo condenser)
+Say goodbye to ovens!
+
+Cryonite rods seem pretty simple to set up. This recipe uses prod 1 modules. Note: Utility science will require about 2 rods/sec15 rods (62.5 Industrial Furnaces)  -12.5 heavy oil (0.5 crude oil processing, focus heavy oil)  Cryonite powder  25 Cryonite crystal 95.7 chem plant    -134 steam (1.3 electric boiler)    Cryonite powder
++114.3  (3.9 red belts) Cryonite powder (41.1 pulverizers 4p1)  -98.6 (3.3 red belts) cryonite (262.8 miner 2's w/out prod, 335.2 with)
++24.7 sand from Cryo powder byproduct+5.4 light oil, 3.6 petrol from oil production
+Can I use atmo condensers on waterless planets to get water????
+I should be able to unlock beacons soon. (vulcanite science) With that, I'll want to automate prod and speed modules. A lot more prod than speed because of the beacon changes. Soon, I'll start using beacons w/ 8 speed 2s. 
+1 prod 2 /sec (12 assembler 3s)  -50 (1.7 belts!!) sulfur  -15 red circuit  -10 green circuit  2 Prod 1s (24 assembler 3s)    -50 (1.7 belts!!) glass    -20 electronic components (stone, coal, oil)
+
+1 speed 2/sec (12 assembler 3s)  -20 SEM  -8 green circuit  -12 red circuit  2 speed 1 (24 assembler 3s)    -24 green circuit    -16 electronic components    20 solid fuel (12.8 fuel refineries 3p1)      -357.2 petrol gas
+Both of these seem SUPER doable, since all of those are already on the train network. That said, it's another tap on my stone production from the circuits and electronic components. I'm already having issues keeping my mall and science running with the lack of stone. Hopefully the band-aid and new section will help with that. 

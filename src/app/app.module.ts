@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -25,11 +25,16 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatListModule} from '@angular/material/list';
+import {MatDialogModule} from '@angular/material/dialog';
 import {PostsComponent} from './posts/posts.component';
 import {SidebarLeftComponent} from './sidebar/sidebar-left/sidebar-left.component';
 import {SidebarRightComponent} from './sidebar/sidebar-right/sidebar-right.component';
 import {FeedEffects} from './common/state/feed/feed.effects';
 import {feedReducer} from './common/state/feed/feed.reducer';
+import {ProfileComponent} from './profile/profile.component';
+import {EditProfileDialogComponent} from './profile/edit-profile-dialog/edit-profile-dialog.component';
+import {AuthInterceptor} from './common/util/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -41,6 +46,8 @@ import {feedReducer} from './common/state/feed/feed.reducer';
     PostsComponent,
     SidebarLeftComponent,
     SidebarRightComponent,
+    ProfileComponent,
+    EditProfileDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,8 +68,10 @@ import {feedReducer} from './common/state/feed/feed.reducer';
     MatButtonModule,
     MatSnackBarModule,
     MatTooltipModule,
+    MatListModule,
+    MatDialogModule,
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

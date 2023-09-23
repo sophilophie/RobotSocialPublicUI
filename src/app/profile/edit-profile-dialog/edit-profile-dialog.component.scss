@@ -1,0 +1,11 @@
+.profile-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+mat-form-field {
+  width: 45%;
+  min-width: 256px;
+  margin: auto 16px 22px 16px !important;
+}

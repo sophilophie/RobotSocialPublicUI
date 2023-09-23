@@ -2,6 +2,11 @@ mat-card {
   margin: calc(5% + 10vh) auto;
   width: 80%;
   max-width: 1024px;
+  form {
+    p {
+      text-align: center;
+    }
+  }
 }
 
 .form-content {

@@ -8,8 +8,8 @@ import {FeedState} from '../common/state/feed/feed.reducer';
 import {Post} from '../common/types/post';
 import {PostServerAdapterService} from '../common/server-adapters/post-server-adapter.service';
 import * as _ from 'lodash';
-import * as moment from 'moment';
 import * as FeedActions from '../common/state/feed/feed.actions';
+import {getPostTimeText} from '../common/util/snippets/time-transformations';
 
 @Component({
   selector: 'rspui-home',
@@ -47,8 +47,7 @@ export class HomeComponent implements OnDestroy, OnInit {
   }
 
   public getPostTimeText(timeString: Date): string {
-    timeString = new Date(timeString);
-    return moment(timeString).format('dddd MMMM DD YYYY hh:mm a');
+    return getPostTimeText(timeString);
   }
 
   public createPost(): void {

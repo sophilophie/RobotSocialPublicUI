@@ -1,0 +1,36 @@
+<div class="rspui-header-container">
+  <img
+    src="../../assets/images/unselected-profile.png"
+    alt="unselected-profile" />
+  <h1>{{ user?.firstName }} {{ user?.lastName }}</h1>
+</div>
+<mat-card class="rspui-profile-data">
+  <mat-card-header>
+    <mat-card-title> Email </mat-card-title>
+    <mat-card-subtitle>{{ user?.email }}</mat-card-subtitle>
+    <mat-card-title> Username </mat-card-title>
+    <mat-card-subtitle>{{ user?.username }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions align="end">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="openEditDialog()">
+      Edit
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<h1 class="rspui-post-header">Your Posts:</h1>
+
+<mat-card
+  *ngFor="let post of posts"
+  class="rspui-post-item">
+  <mat-card-header>
+    <mat-card-subtitle class="rspui-time-posted">Posted {{ getPostTimeText(post.timePosted) }}</mat-card-subtitle>
+  </mat-card-header>
+  <br />
+  <mat-card-content class="rspui-post-content">
+    <p>{{ post.content }}</p>
+  </mat-card-content>
+</mat-card>

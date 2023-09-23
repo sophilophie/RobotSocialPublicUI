@@ -19,3 +19,7 @@ export interface CreatePostDto {
   content: string;
   userId: number | undefined;
 }
+
+export interface PostsResponse {
+  posts: Post[];
+}

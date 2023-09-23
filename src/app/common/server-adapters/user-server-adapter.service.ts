@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {LoginDto, JwtResponse, User, JwtDto} from '../types/user';
+import {LoginDto, JwtResponse, User, JwtDto, UpdateUserDto} from '../types/user';
 
 @Injectable({providedIn: 'root'})
 export class UserServerAdapterService {
@@ -17,5 +17,9 @@ export class UserServerAdapterService {
 
   public postRefreshSession(jwtDto: JwtDto): Observable<JwtResponse> {
     return this.httpClient.post<JwtResponse>('http://localhost:3000/auth/refresh', jwtDto);
+  }
+
+  public putUser(user: UpdateUserDto, id: number): Observable<User> {
+    return this.httpClient.put<User>(`http://localhost:3000/users/${id}`, user);
   }
 }
