@@ -58,5 +58,5 @@ describe('EditProfileDialogComponent', () => {
     expect(mockStore.dispatch).toHaveBeenCalled();
     mockAuthEffects.updateUserSuccess$.next();
     expect(mockDialog.close).toHaveBeenCalled();
-  })
+  });
 });

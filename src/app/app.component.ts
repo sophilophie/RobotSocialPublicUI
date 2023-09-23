@@ -25,7 +25,7 @@ export class AppComponent implements OnDestroy, OnInit {
     if (accessToken) {
       this.store.dispatch(AuthActions.refreshRequest({access_token: accessToken}));
     } else {
-      this.router.navigate(['/login']);
+      if (!window.location.pathname.includes('/sign-up')) this.router.navigate(['/login']);
     }
     this.subscription = this.authState$.subscribe((authState: AuthState) => {
       this.isLoggedIn = authState.isLoggedIn;
