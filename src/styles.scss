@@ -20,6 +20,21 @@ a {
   }
 }
 
+#rspui-root-loading {
+  z-index: 2500;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  background-color: #303030;
+  img {
+    align-self: center;
+    margin: auto;
+  }
+}
+
 .snackbar-success {
   .mdc-snackbar__surface {
     background-color: rgb(41, 94, 41) !important;

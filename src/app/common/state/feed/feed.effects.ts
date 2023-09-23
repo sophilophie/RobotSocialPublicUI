@@ -4,6 +4,7 @@ import {catchError, exhaustMap, ObservableInput, map, tap, of} from 'rxjs';
 import {PostServerAdapterService} from '../../server-adapters/post-server-adapter.service';
 import {NotificationService} from '../../util/notification.service';
 import * as FeedActions from './feed.actions';
+import {LoadingOverlayService} from '../../util/loading-overlay/loading-overlay.service';
 
 @Injectable()
 export class FeedEffects {
@@ -11,6 +12,7 @@ export class FeedEffects {
     private actions$: Actions,
     private postServerAdapterService: PostServerAdapterService,
     private notificationService: NotificationService,
+    private loadingOverlayService: LoadingOverlayService,
   ) {}
 
   public feedRequest$ = createEffect(() =>
@@ -25,11 +27,23 @@ export class FeedEffects {
     ),
   );
 
+  public feedSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(FeedActions.newsFeedSuccess),
+        tap(() => this.loadingOverlayService.isLoading$.next(false)),
+      ),
+    {dispatch: false},
+  );
+
   public feedFailure$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(FeedActions.newsFeedFailure),
-        tap(() => this.notificationService.error('There was an error getting your news feed.')),
+        tap(() => {
+          this.notificationService.error('There was an error getting your news feed.');
+          this.loadingOverlayService.isLoading$.next(false);
+        }),
       ),
     {dispatch: false},
   );
@@ -49,7 +63,18 @@ export class FeedEffects {
   public userPostsFailure$ = createEffect(() =>
     this.actions$.pipe(
       ofType(FeedActions.userPostsFailure),
-      tap(() => this.notificationService.error('There was an error getting your posts.')),
+      tap(() => {
+        this.notificationService.error('There was an error getting your posts.');
+      }),
     ),
+  );
+
+  public userPostsSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(FeedActions.userPostsSuccess),
+        tap(() => this.loadingOverlayService.isLoading$.next(false)),
+      ),
+    {dispatch: false},
   );
 }

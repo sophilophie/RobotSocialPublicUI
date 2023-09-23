@@ -27,6 +27,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {PostsComponent} from './posts/posts.component';
 import {SidebarLeftComponent} from './sidebar/sidebar-left/sidebar-left.component';
 import {SidebarRightComponent} from './sidebar/sidebar-right/sidebar-right.component';
@@ -35,6 +36,7 @@ import {feedReducer} from './common/state/feed/feed.reducer';
 import {ProfileComponent} from './profile/profile.component';
 import {EditProfileDialogComponent} from './profile/edit-profile-dialog/edit-profile-dialog.component';
 import {AuthInterceptor} from './common/util/auth.interceptor';
+import {LoadingOverlayComponent} from './common/util/loading-overlay/loading-overlay.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import {AuthInterceptor} from './common/util/auth.interceptor';
     SidebarRightComponent,
     ProfileComponent,
     EditProfileDialogComponent,
+    LoadingOverlayComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +73,7 @@ import {AuthInterceptor} from './common/util/auth.interceptor';
     MatTooltipModule,
     MatListModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],
