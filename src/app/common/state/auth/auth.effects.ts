@@ -6,6 +6,7 @@ import {UserServerAdapterService} from '../../server-adapters/user-server-adapte
 import {NotificationService} from '../../util/notification.service';
 import * as AuthActions from './auth.actions';
 import * as FeedActions from '../feed/feed.actions';
+import {LoadingOverlayService} from '../../util/loading-overlay/loading-overlay.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthEffects {
@@ -14,12 +15,14 @@ export class AuthEffects {
     private userServerAdapterService: UserServerAdapterService,
     private notificationService: NotificationService,
     private router: Router,
+    private loadingOverlayService: LoadingOverlayService,
   ) {}
 
   public loginRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginRequest),
       exhaustMap((action): ObservableInput<any> => {
+        this.loadingOverlayService.isLoading$.next(true);
         return this.userServerAdapterService.postSession(action).pipe(
           map((response) => AuthActions.loginSuccess(response)),
           catchError((error) => of(AuthActions.loginFailure(error))),
@@ -49,6 +52,7 @@ export class AuthEffects {
         ofType(AuthActions.loginFailure),
         tap(() => {
           this.notificationService.error('Invalid username or password!');
+          this.loadingOverlayService.isLoading$.next(false);
         }),
       ),
     {dispatch: false},
@@ -71,6 +75,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.refreshRequest),
       exhaustMap((action): ObservableInput<any> => {
+        this.loadingOverlayService.isLoading$.next(true);
         return this.userServerAdapterService.postRefreshSession(action).pipe(
           map((response) => AuthActions.refreshSuccess(response)),
           catchError((error) => of(AuthActions.refreshFailure(error))),
@@ -101,6 +106,7 @@ export class AuthEffects {
         tap(() => {
           this.router.navigate(['/login']);
           this.notificationService.error('Something went wrong. Please log in again.');
+          this.loadingOverlayService.isLoading$.next(false);
         }),
       ),
     {dispatch: false},
@@ -110,6 +116,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.signupRequest),
       exhaustMap((user): ObservableInput<any> => {
+        this.loadingOverlayService.isLoading$.next(true);
         return this.userServerAdapterService.postUser(user).pipe(
           map((response) => AuthActions.signupSuccess(response)),
           catchError((error) => of(AuthActions.signupFailure(error))),
@@ -126,6 +133,7 @@ export class AuthEffects {
           localStorage.setItem('access_token', response.access_token as string);
           this.router.navigate(['/']);
           this.notificationService.success('Login Successful!');
+          this.loadingOverlayService.isLoading$.next(false);
         }),
       ),
     {dispatch: false},
@@ -136,6 +144,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.signupFailure),
         tap((response: any) => {
+          this.loadingOverlayService.isLoading$.next(false);
           if (response.status === 409) {
             return this.notificationService.error('Username or email has been taken');
           }
@@ -149,6 +158,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.updateUserRequest),
       exhaustMap((user): ObservableInput<any> => {
+        this.loadingOverlayService.isLoading$.next(true);
         return this.userServerAdapterService.putUser(user, user.id as number).pipe(
           map((response) => AuthActions.updateUserSuccess(response)),
           catchError((error) => of(AuthActions.updateUserFailure(error))),
@@ -161,7 +171,10 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.updateUserSuccess),
-        tap(() => this.notificationService.success('User Updated!')),
+        tap(() => {
+          this.notificationService.success('User Updated!');
+          this.loadingOverlayService.isLoading$.next(false);
+        }),
       ),
     {dispatch: false},
   );
@@ -171,6 +184,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.updateUserFailure),
         tap((response: any) => {
+          this.loadingOverlayService.isLoading$.next(false);
           if (response.status === 409) {
             return this.notificationService.error('Username or email has been taken');
           }

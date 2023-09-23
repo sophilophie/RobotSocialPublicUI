@@ -1,11 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, Inject} from '@angular/core';
 import {Store} from '@ngrx/store';
 import * as AuthActions from './common/state/auth/auth.actions';
-import {Observable, Subscription} from 'rxjs';
+import {Observable, Subscription, filter, take, tap} from 'rxjs';
 import {AuthState} from './common/state/auth/auth.reducer';
 import {AppState} from './common/state/state';
 import {User} from './common/types/user';
 import {Router} from '@angular/router';
+import {LoadingOverlayService} from './common/util/loading-overlay/loading-overlay.service';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'rspui-root',
@@ -13,7 +15,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnDestroy, OnInit {
-  constructor(private store: Store, private router: Router) {}
+  constructor(
+    private store: Store,
+    private router: Router,
+    private loadingOverlayService: LoadingOverlayService,
+    @Inject(DOCUMENT) private document: Document,
+  ) {}
 
   public isLoggedIn = false;
   public user: User | null = null;
@@ -31,6 +38,12 @@ export class AppComponent implements OnDestroy, OnInit {
       this.isLoggedIn = authState.isLoggedIn;
       this.user = authState.user;
     });
+    this.loadingOverlayService.isLoading$
+      .pipe(
+        filter((isLoading) => !isLoading),
+        take(1),
+      )
+      .subscribe(() => this.document.getElementById('rspui-root-loading')?.remove());
   }
 
   public ngOnDestroy(): void {
