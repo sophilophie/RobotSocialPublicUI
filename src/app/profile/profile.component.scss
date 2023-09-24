@@ -24,3 +24,12 @@
 .rspui-post-item {
   margin-bottom: 16px;
 }
+
+mat-card {
+  h2 {
+    margin-bottom: 0;
+  }
+  button {
+    float: right;
+  }
+}

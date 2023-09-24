@@ -22,4 +22,8 @@ export class UserServerAdapterService {
   public putUser(user: UpdateUserDto, id: number): Observable<User> {
     return this.httpClient.put<User>(`http://localhost:3000/users/${id}`, user);
   }
+
+  public getSearchedUsers(searchTerm: string): Observable<User[]> {
+    return this.httpClient.get<User[]>('http://localhost:3000/users/search', {params: {searchTerm}});
+  }
 }
