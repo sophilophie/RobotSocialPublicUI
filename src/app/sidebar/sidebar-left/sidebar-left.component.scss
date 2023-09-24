@@ -1,5 +1,7 @@
 .rspui-nav-list-container {
   margin: 5rem 3rem;
+  position: sticky;
+  top: 2rem;
 }
 
 .mat-nav-list .mat-list-item:focus {

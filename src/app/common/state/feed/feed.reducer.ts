@@ -38,4 +38,10 @@ export const feedReducer = createReducer(
       userPosts: [],
     };
   }),
+  on(FeedActions.clearFeed, () => {
+    return {
+      feed: [],
+      userPosts: [],
+    };
+  }),
 );

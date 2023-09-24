@@ -37,6 +37,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {EditProfileDialogComponent} from './profile/edit-profile-dialog/edit-profile-dialog.component';
 import {AuthInterceptor} from './common/util/auth.interceptor';
 import {LoadingOverlayComponent} from './common/util/loading-overlay/loading-overlay.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {LoadingOverlayComponent} from './common/util/loading-overlay/loading-ove
     ProfileComponent,
     EditProfileDialogComponent,
     LoadingOverlayComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

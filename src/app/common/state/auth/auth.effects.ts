@@ -67,6 +67,7 @@ export class AuthEffects {
           this.router.navigate(['/login']);
           this.notificationService.success('Successfully logged out!');
         }),
+        concatMap(() => [FeedActions.clearFeed()]),
       ),
     {dispatch: false},
   );

@@ -13,3 +13,5 @@ export const userPostsRequest = createAction('[FEED] User Posts Request', props<
 export const userPostsSuccess = createAction('[FEED] User Posts Success', props<PostsResponse>());
 
 export const userPostsFailure = createAction('[Feed] User Posts Failure', props<PostsResponse>());
+
+export const clearFeed = createAction('[FEED] Clear Feed');

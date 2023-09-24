@@ -1,0 +1,41 @@
+<h1>Search for people:</h1>
+
+<mat-form-field class="rspui-search-field">
+  <mat-label>Search</mat-label>
+  <textarea
+    #searchInput
+    matInput
+    (keydown.enter)="executeSearch($event)"
+    (input)="evaluateHeight()"
+    rows="1"
+    maxlength="255"></textarea>
+  <button
+    matSuffix
+    mat-icon-button
+    matTooltip="Create Post"
+    (click)="executeSearch()">
+    <mat-icon>search</mat-icon>
+  </button>
+</mat-form-field>
+
+<h2 *ngIf="searchResults.length > 0">
+  Search Results:
+  <button
+    (click)="clearSearch()"
+    mat-stroked-button
+    color="primary">
+    Clear
+  </button>
+</h2>
+
+<mat-card
+  *ngFor="let user of searchResults"
+  class="rspui-search-result-item">
+  <mat-card-header>
+    <mat-card-title>{{ user.username }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ user.firstName }} {{ user.lastName }}</p>
+    <p>{{ user.email }}</p>
+  </mat-card-content>
+</mat-card>
