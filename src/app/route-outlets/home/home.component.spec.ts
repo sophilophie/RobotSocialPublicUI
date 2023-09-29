@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {Store} from '@ngrx/store';
 import {HomeComponent} from './home.component';
-import {PostServerAdapterService} from '../common/server-adapters/post-server-adapter.service';
+import {PostServerAdapterService} from '../../common/server-adapters/post-server-adapter.service';
 import {of} from 'rxjs';
 import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 

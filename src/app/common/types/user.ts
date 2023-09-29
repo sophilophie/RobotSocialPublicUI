@@ -12,7 +12,7 @@ export interface User {
   requestedFriends?: FriendRequest[];
   requestsReceived?: FriendRequest[];
   friendships?: Friendship[];
-  posts: Post[];
+  posts?: Post[];
 }
 
 export interface Friendship {
