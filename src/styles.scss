@@ -6,7 +6,14 @@ $rspui-primary: mat-palette($mat-purple);
 $rspui-accent: mat-palette($mat-green, A200, A400, A700);
 $rspui-warn: mat-palette($mat-red);
 
-$rspui-theme: mat-dark-theme($rspui-primary, $rspui-accent, $rspui-warn);
+$rspui-theme: mat-dark-theme((
+  color: (
+    primary: $rspui-primary,
+    accent: $rspui-accent,
+  ),
+  typography: define-typography-config(),
+  density: 0,
+));
 
 @include angular-material-theme($rspui-theme);
 

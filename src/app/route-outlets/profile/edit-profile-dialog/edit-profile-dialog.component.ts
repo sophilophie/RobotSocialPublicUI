@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Store} from '@ngrx/store';
 import {User} from 'src/app/common/types/user';
-import * as AuthActions from '../../common/state/auth/auth.actions';
+import * as AuthActions from '../../../common/state/auth/auth.actions';
 import {AuthEffects} from 'src/app/common/state/auth/auth.effects';
 import {take} from 'rxjs';
 import {NotificationService} from 'src/app/common/util/notification.service';

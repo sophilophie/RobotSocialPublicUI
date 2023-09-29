@@ -1,0 +1,53 @@
+<mat-tab-group
+  mat-stretch-tabs="false"
+  mat-align-tabs="start"
+  dynamicHeight>
+  <mat-tab label="Friends">
+    <div class="rspui-tab-content">
+      <h1 *ngIf="!user?.friendships?.length">No friends (yet)!</h1>
+      <br />
+      <mat-card
+        *ngFor="let friendship of user?.friendships"
+        class="rspui-search-result-item">
+        <mat-card-header>
+          <mat-card-title>{{ friendship.friend.username }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ friendship.friend.firstName }} {{ friendship.friend.lastName }}</p>
+          <p>{{ friendship.friend.email }}</p>
+          <p>Friends since {{ formatDate(friendship.dateCreated) }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="Friend Requests">
+    <ng-template matTabLabel>
+      <span
+        [matBadge]="user?.requestsReceived?.length"
+        [matBadgeHidden]="user?.requestsReceived?.length === 0"
+        matBadgeColor="accent">
+        Friend Requests
+      </span>
+    </ng-template>
+    <div class="rspui-tab-content">
+      <h1 *ngIf="!user?.requestsReceived?.length">No requests received</h1>
+      <br />
+      <mat-card *ngFor="let request of user?.requestsReceived">
+        <mat-card-header>
+          <mat-card-title>{{ request?.requestor?.username }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <button
+            mat-icon-button
+            matTooltip="Accept friend request"
+            (click)="acceptFriendRequest(request)"
+            color="accent">
+            <mat-icon>person_add</mat-icon>
+          </button>
+          <p>Requested on {{ formatDate(request.dateCreated) }}</p>
+          <p>{{ request.requestor.firstName }} {{ request.requestor.lastName }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+</mat-tab-group>

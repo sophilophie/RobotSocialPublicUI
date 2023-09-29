@@ -1,15 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {AuthState} from '../common/state/auth/auth.reducer';
+import {AuthState} from '../../common/state/auth/auth.reducer';
 import {Observable, Subscription} from 'rxjs';
-import {AppState} from '../common/state/state';
-import {User} from '../common/types/user';
+import {AppState} from '../../common/state/state';
+import {User} from '../../common/types/user';
 import {MatDialog} from '@angular/material/dialog';
 import * as _ from 'lodash';
 import {EditProfileDialogComponent} from './edit-profile-dialog/edit-profile-dialog.component';
-import {getPostTimeText} from '../common/util/snippets/time-transformations';
-import {Post} from '../common/types/post';
-import {FeedState} from '../common/state/feed/feed.reducer';
+import {getPostTimeText} from '../../common/util/snippets/time-transformations';
+import {Post} from '../../common/types/post';
+import {FeedState} from '../../common/state/feed/feed.reducer';
 
 @Component({
   selector: 'rspui-profile',
