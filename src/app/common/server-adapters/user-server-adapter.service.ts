@@ -1,7 +1,16 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {LoginDto, JwtResponse, User, JwtDto, UpdateUserDto} from '../types/user';
+import {
+  LoginDto,
+  JwtResponse,
+  User,
+  JwtDto,
+  UpdateUserDto,
+  FriendRequest,
+  FriendRequestDto,
+  Friendship,
+} from '../types/user';
 
 @Injectable({providedIn: 'root'})
 export class UserServerAdapterService {
@@ -25,5 +34,13 @@ export class UserServerAdapterService {
 
   public getSearchedUsers(searchTerm: string): Observable<User[]> {
     return this.httpClient.get<User[]>('http://localhost:3000/users/search', {params: {searchTerm}});
+  }
+
+  public postFriendRequest(request: FriendRequestDto): Observable<FriendRequest> {
+    return this.httpClient.post<FriendRequest>('http://localhost:3000/users/friend-request', request);
+  }
+
+  public postFriendship(request: FriendRequestDto): Observable<Friendship> {
+    return this.httpClient.post<Friendship>('http://localhost:3000/users/friendship', request);
   }
 }

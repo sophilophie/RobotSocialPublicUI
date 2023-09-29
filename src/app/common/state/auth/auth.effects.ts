@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {catchError, exhaustMap, ObservableInput, map, tap, of, concatMap, forkJoin} from 'rxjs';
+import {catchError, exhaustMap, ObservableInput, map, tap, of, concatMap, forkJoin, mergeMap} from 'rxjs';
 import {UserServerAdapterService} from '../../server-adapters/user-server-adapter.service';
 import {NotificationService} from '../../util/notification.service';
 import * as AuthActions from './auth.actions';
@@ -21,9 +21,10 @@ export class AuthEffects {
   public loginRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.loginRequest),
-      exhaustMap((action): ObservableInput<any> => {
+      map((action) => ({username: action.username, password: action.password})),
+      exhaustMap((request): ObservableInput<any> => {
         this.loadingOverlayService.isLoading$.next(true);
-        return this.userServerAdapterService.postSession(action).pipe(
+        return this.userServerAdapterService.postSession(request).pipe(
           map((response) => AuthActions.loginSuccess(response)),
           catchError((error) => of(AuthActions.loginFailure(error))),
         );
@@ -39,7 +40,7 @@ export class AuthEffects {
         this.router.navigate(['/']);
         this.notificationService.success('Login Successful!');
       }),
-      concatMap((response) => [
+      mergeMap((response) => [
         FeedActions.newsFeedRequest(response?.user),
         FeedActions.userPostsRequest(response?.user),
       ]),
@@ -58,26 +59,25 @@ export class AuthEffects {
     {dispatch: false},
   );
 
-  public logout$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AuthActions.logout),
-        tap(() => {
-          localStorage.removeItem('access_token');
-          this.router.navigate(['/login']);
-          this.notificationService.success('Successfully logged out!');
-        }),
-        concatMap(() => [FeedActions.clearFeed()]),
-      ),
-    {dispatch: false},
+  public logout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.logout),
+      tap(() => {
+        localStorage.removeItem('access_token');
+        this.router.navigate(['/login']);
+        this.notificationService.success('Successfully logged out!');
+      }),
+      mergeMap(() => [FeedActions.clearFeed()]),
+    ),
   );
 
   public refreshRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.refreshRequest),
-      exhaustMap((action): ObservableInput<any> => {
+      map((action) => ({access_token: action.access_token})),
+      exhaustMap((request): ObservableInput<any> => {
         this.loadingOverlayService.isLoading$.next(true);
-        return this.userServerAdapterService.postRefreshSession(action).pipe(
+        return this.userServerAdapterService.postRefreshSession(request).pipe(
           map((response) => AuthActions.refreshSuccess(response)),
           catchError((error) => of(AuthActions.refreshFailure(error))),
         );
@@ -93,7 +93,7 @@ export class AuthEffects {
         if (this.router.url === '/login' || this.router.url === '/sign-up') this.router.navigate(['/']);
         this.notificationService.success('Welcome Back!');
       }),
-      concatMap((response) => [
+      mergeMap((response) => [
         FeedActions.newsFeedRequest(response?.user),
         FeedActions.userPostsRequest(response?.user),
       ]),
@@ -105,6 +105,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.refreshFailure),
         tap(() => {
+          localStorage.removeItem('access_token');
           this.router.navigate(['/login']);
           this.notificationService.error('Something went wrong. Please log in again.');
           this.loadingOverlayService.isLoading$.next(false);

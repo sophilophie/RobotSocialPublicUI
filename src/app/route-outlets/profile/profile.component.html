@@ -27,7 +27,7 @@
   *ngFor="let post of posts"
   class="rspui-post-item">
   <mat-card-header>
-    <mat-card-subtitle class="rspui-time-posted">Posted {{ getPostTimeText(post.timePosted) }}</mat-card-subtitle>
+    <mat-card-subtitle class="rspui-time-posted">Posted {{ getPostTimeText(post.dateCreated) }}</mat-card-subtitle>
   </mat-card-header>
   <br />
   <mat-card-content class="rspui-post-content">

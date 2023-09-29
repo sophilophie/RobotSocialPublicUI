@@ -16,5 +16,16 @@
       <div matListItemTitle>Search</div>
     </mat-list-item>
     <mat-divider></mat-divider>
+    <mat-list-item routerLink="/friends">
+      <mat-icon
+        matListItemIcon
+        [matBadge]="user?.requestsReceived?.length"
+        [matBadgeHidden]="user?.requestsReceived?.length === 0"
+        matBadgeColor="accent">
+        group
+      </mat-icon>
+      <div matListItemTitle>Friends</div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
   </mat-nav-list>
 </div>

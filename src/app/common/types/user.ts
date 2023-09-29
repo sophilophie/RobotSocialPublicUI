@@ -1,8 +1,9 @@
-import {FriendRequest} from './friend-request';
 import {Post} from './post';
 
 export interface User {
   id?: number;
+  dateCreated?: Date;
+  dateUpdated?: Date;
   username: string;
   firstName: string;
   lastName: string;
@@ -10,8 +11,14 @@ export interface User {
   password?: string;
   requestedFriends?: FriendRequest[];
   requestsReceived?: FriendRequest[];
-  friends?: User[];
+  friendships?: Friendship[];
   posts: Post[];
+}
+
+export interface Friendship {
+  id?: number;
+  dateCreated?: Date;
+  friend: User;
 }
 
 export interface LoginDto {
@@ -34,4 +41,16 @@ export interface UpdateUserDto {
   firstName: string;
   lastName: string;
   email: string;
+}
+
+export interface FriendRequest {
+  id: number;
+  dateCreated: Date;
+  requestor: User;
+  requestee: User;
+}
+
+export interface FriendRequestDto {
+  requestorId: number;
+  requesteeId: number;
 }

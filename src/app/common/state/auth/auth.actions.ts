@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import {JwtResponse, LoginDto, JwtDto} from '../../types/user';
+import {JwtResponse, LoginDto, JwtDto, FriendRequestDto, FriendRequest, Friendship} from '../../types/user';
 import {User} from 'src/app/common/types/user';
 
 export const loginRequest = createAction('[AUTH] Login Request', props<LoginDto>());
@@ -27,3 +27,9 @@ export const updateUserRequest = createAction('[AUTH] Update User Request', prop
 export const updateUserSuccess = createAction('[AUTH] Update User Success', props<User>());
 
 export const updateUserFailure = createAction('[AUTH Update User Failure', props<User>());
+
+export const updateSentFriendRequests = createAction('[AUTH] Update User Friend Requests', props<FriendRequest>());
+
+export const removeReceivedFriendRequest = createAction('[AUTH] Remove User Friend Request', props<FriendRequest>());
+
+export const updateFriendships = createAction('[AUTH] Update User Friendships', props<Friendship>());

@@ -23,8 +23,8 @@
   *ngFor="let post of newsFeed"
   class="rspui-feed-item">
   <mat-card-header>
-    <mat-card-subtitle class="rspui-time-posted">Posted {{ getPostTimeText(post.timePosted) }}</mat-card-subtitle>
     <mat-card-title class="rspui-feed-heading">{{ post?.user?.username }}</mat-card-title>
+    <mat-card-subtitle class="rspui-time-posted">Posted {{ getPostTimeText(post.dateCreated) }}</mat-card-subtitle>
   </mat-card-header>
   <br />
   <mat-card-content class="rspui-feed-content">

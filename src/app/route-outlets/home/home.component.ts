@@ -1,15 +1,15 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable, Subscription} from 'rxjs';
-import {AuthState} from '../common/state/auth/auth.reducer';
-import {AppState} from '../common/state/state';
-import {User} from '../common/types/user';
-import {FeedState} from '../common/state/feed/feed.reducer';
-import {Post} from '../common/types/post';
-import {PostServerAdapterService} from '../common/server-adapters/post-server-adapter.service';
+import {AuthState} from '../../common/state/auth/auth.reducer';
+import {AppState} from '../../common/state/state';
+import {User} from '../../common/types/user';
+import {FeedState} from '../../common/state/feed/feed.reducer';
+import {Post} from '../../common/types/post';
+import {PostServerAdapterService} from '../../common/server-adapters/post-server-adapter.service';
 import * as _ from 'lodash';
-import * as FeedActions from '../common/state/feed/feed.actions';
-import {getPostTimeText} from '../common/util/snippets/time-transformations';
+import * as FeedActions from '../../common/state/feed/feed.actions';
+import {getPostTimeText} from '../../common/util/snippets/time-transformations';
 
 @Component({
   selector: 'rspui-home',
@@ -56,7 +56,10 @@ export class HomeComponent implements OnDestroy, OnInit {
       userId: this.user?.id,
     };
     this.postServerAdapterService.postNewPost(postDto).subscribe(() => {
-      if (this.user) this.store.dispatch(FeedActions.newsFeedRequest(this.user));
+      if (this.user) {
+        this.store.dispatch(FeedActions.newsFeedRequest(this.user));
+        this.store.dispatch(FeedActions.userPostsRequest(this.user));
+      }
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       this.postInput!.nativeElement.value = '';
       this.evaluateHeight();

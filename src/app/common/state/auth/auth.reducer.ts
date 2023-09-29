@@ -1,6 +1,7 @@
 import {createReducer, on} from '@ngrx/store';
-import {User} from '../../types/user';
+import {FriendRequest, User} from '../../types/user';
 import * as AuthActions from './auth.actions';
+import * as _ from 'lodash';
 
 export interface AuthState {
   access_token: string | null;
@@ -79,5 +80,41 @@ export const authReducer = createReducer(
       ...state,
       user,
     };
+  }),
+  on(AuthActions.updateSentFriendRequests, (state, friendRequest) => {
+    if (state.user) {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          requestedFriends: state.user.requestedFriends?.concat(friendRequest),
+        },
+      };
+    }
+    return {...state};
+  }),
+  on(AuthActions.removeReceivedFriendRequest, (state, friendRequest) => {
+    if (state.user) {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          requestsReceived: _.filter(state.user.requestsReceived, (request) => request.id !== friendRequest.id),
+        },
+      };
+    }
+    return {...state};
+  }),
+  on(AuthActions.updateFriendships, (state, friendship) => {
+    if (state.user) {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          friendships: state.user.friendships?.concat(friendship),
+        },
+      };
+    }
+    return {...state};
   }),
 );

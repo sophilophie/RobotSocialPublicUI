@@ -14,7 +14,7 @@ import {AuthEffects} from './common/state/auth/auth.effects';
 import {NavbarComponent} from './navbar/navbar.component';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './login/signup/signup.component';
-import {HomeComponent} from './home/home.component';
+import {HomeComponent} from './route-outlets/home/home.component';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
@@ -28,16 +28,18 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatListModule} from '@angular/material/list';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {PostsComponent} from './posts/posts.component';
 import {SidebarLeftComponent} from './sidebar/sidebar-left/sidebar-left.component';
 import {SidebarRightComponent} from './sidebar/sidebar-right/sidebar-right.component';
 import {FeedEffects} from './common/state/feed/feed.effects';
 import {feedReducer} from './common/state/feed/feed.reducer';
-import {ProfileComponent} from './profile/profile.component';
-import {EditProfileDialogComponent} from './profile/edit-profile-dialog/edit-profile-dialog.component';
+import {ProfileComponent} from './route-outlets/profile/profile.component';
+import {EditProfileDialogComponent} from './route-outlets/profile/edit-profile-dialog/edit-profile-dialog.component';
 import {AuthInterceptor} from './common/util/auth.interceptor';
 import {LoadingOverlayComponent} from './common/util/loading-overlay/loading-overlay.component';
-import { SearchComponent } from './search/search.component';
+import {SearchComponent} from './route-outlets/search/search.component';
+import {FriendsComponent} from './route-outlets/friends/friends.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -46,13 +48,13 @@ import { SearchComponent } from './search/search.component';
     SignupComponent,
     HomeComponent,
     NavbarComponent,
-    PostsComponent,
     SidebarLeftComponent,
     SidebarRightComponent,
     ProfileComponent,
     EditProfileDialogComponent,
     LoadingOverlayComponent,
     SearchComponent,
+    FriendsComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +78,8 @@ import { SearchComponent } from './search/search.component';
     MatListModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatTabsModule,
+    MatBadgeModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],

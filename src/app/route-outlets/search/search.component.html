@@ -1,0 +1,53 @@
+<h1>Search for people:</h1>
+
+<mat-form-field class="rspui-search-field">
+  <mat-label>Search</mat-label>
+  <textarea
+    #searchInput
+    matInput
+    (keydown.enter)="executeSearch($event)"
+    (input)="evaluateHeight()"
+    rows="1"
+    maxlength="255"></textarea>
+  <button
+    matSuffix
+    mat-icon-button
+    matTooltip="Create Post"
+    (click)="executeSearch()">
+    <mat-icon>search</mat-icon>
+  </button>
+</mat-form-field>
+
+<h2 *ngIf="searchResults.length > 0">
+  Search Results:
+  <button
+    (click)="clearSearch()"
+    mat-stroked-button
+    color="primary">
+    Clear
+  </button>
+</h2>
+
+<mat-card
+  *ngFor="let person of searchResults"
+  class="rspui-search-result-item">
+  <mat-card-header>
+    <mat-card-title>{{ person.username }}</mat-card-title>
+  </mat-card-header>
+  <br />
+  <mat-card-content>
+    <button
+      *ngIf="!isFriend(person) && !isFriendRequested(person) && !isRequestingFriendship(person)"
+      mat-icon-button
+      matTooltip="Send friend request"
+      color="accent"
+      (click)="sendFriendRequest(person.id)">
+      <mat-icon>person_add</mat-icon>
+    </button>
+    <p>{{ person.firstName }} {{ person.lastName }}</p>
+    <p>{{ person.email }}</p>
+    <p *ngIf="isFriendRequested(person)">Sent friend request on {{ getFriendshipDate(person) }}</p>
+    <p *ngIf="isFriend(person)">Friends since {{ getFriendshipDate(person) }}</p>
+    <p *ngIf="isRequestingFriendship(person)">Requested friendship on {{ getFriendshipDate(person) }}</p>
+  </mat-card-content>
+</mat-card>
