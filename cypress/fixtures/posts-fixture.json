@@ -4,7 +4,7 @@
     "content": "First Post",
     "timePosted": "2023-09-23T18:46:27.645Z",
     "user": {
-      "id": 0,
+      "id": 1,
       "username": "e2eTester0",
       "firstName": "e2e",
       "lastName": "tester",
@@ -16,7 +16,7 @@
     "content": "Second Post",
     "timePosted": "2023-09-23T18:46:29.645Z",
     "user": {
-      "id": 0,
+      "id": 1,
       "username": "e2eTester0",
       "firstName": "e2e",
       "lastName": "tester",
@@ -28,7 +28,7 @@
     "content": "Third Post",
     "timePosted": "2023-09-23T18:46:31.645Z",
     "user": {
-      "id": 0,
+      "id": 1,
       "username": "e2eTester0",
       "firstName": "e2e",
       "lastName": "tester",
@@ -40,7 +40,7 @@
     "content": "Fourth Post",
     "timePosted": "2023-09-23T18:46:33.645Z",
     "user": {
-      "id": 0,
+      "id": 1,
       "username": "e2eTester0",
       "firstName": "e2e",
       "lastName": "tester",

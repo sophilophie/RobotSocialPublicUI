@@ -60,13 +60,15 @@ export class FeedEffects {
     ),
   );
 
-  public userPostsFailure$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(FeedActions.userPostsFailure),
-      tap(() => {
-        this.notificationService.error('There was an error getting your posts.');
-      }),
-    ),
+  public userPostsFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(FeedActions.userPostsFailure),
+        tap(() => {
+          this.notificationService.error('There was an error getting your posts.');
+        }),
+      ),
+    {dispatch: false},
   );
 
   public userPostsSuccess$ = createEffect(

@@ -12,13 +12,18 @@
   <button
     matSuffix
     mat-icon-button
+    [disabled]="hasTooManyLines()"
     matTooltip="Create Post"
     (click)="createPost()">
     <mat-icon>done_outline</mat-icon>
   </button>
-  <mat-hint align="end">{{ postInput.value.length }} / 255</mat-hint>
+  <mat-hint
+    align="end"
+    *ngIf="!hasTooManyLines()">
+    {{ postInput.value.length }} / 255
+  </mat-hint>
 </mat-form-field>
-
+<mat-error *ngIf="hasTooManyLines()">Too many lines of text!</mat-error>
 <mat-card
   *ngFor="let post of newsFeed"
   class="rspui-feed-item">

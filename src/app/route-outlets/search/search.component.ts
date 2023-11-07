@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {UserServerAdapterService} from '../../common/server-adapters/user-server-adapter.service';
 import {Friendship, User} from '../../common/types/user';
-import {Observable, Subscription, take} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {AuthState} from '../../common/state/auth/auth.reducer';
 import {AppState} from '../../common/state/state';
@@ -45,12 +45,14 @@ export class SearchComponent implements OnDestroy, OnInit {
   public executeSearch(event?: Event): void {
     event?.preventDefault();
     if (this.searchInput?.nativeElement.value) {
-      this.userServerAdapter
-        .getSearchedUsers(this.searchInput?.nativeElement.value)
-        .pipe(take(1))
-        .subscribe((searchResults: User[]) => {
+      this.userServerAdapter.getSearchedUsers(this.searchInput?.nativeElement.value).subscribe({
+        next: (searchResults: User[]) => {
           this.searchResults = searchResults;
-        });
+        },
+        error: () => {
+          this.notificationService.error('Something went wrong!');
+        },
+      });
     } else {
       this.searchResults = [];
     }
@@ -83,21 +85,13 @@ export class SearchComponent implements OnDestroy, OnInit {
   }
 
   public isFriend(person: User): boolean {
-    let friendFound = person.id === this.user?.id;
-    this.user?.friendships?.forEach((friendship) => {
-      if (person.id === friendship.friend.id) {
-        friendFound = true;
-      }
-    });
-    return friendFound;
+    return (
+      _.some(this.user?.friendships, (friendship) => person.id === friendship.friend.id) || person.id === this.user?.id
+    );
   }
 
   public isFriendRequested(person: User): boolean {
-    let requestFound = false;
-    this.user?.requestedFriends?.forEach((friendRequest) => {
-      if (friendRequest.requestee.id === person.id) requestFound = true;
-    });
-    return requestFound;
+    return _.some(this.user?.requestedFriends, (friendRequest) => friendRequest.requestee.id === person.id);
   }
 
   public isRequestingFriendship(person: User): boolean {
