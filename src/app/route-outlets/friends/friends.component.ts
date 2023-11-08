@@ -42,7 +42,7 @@ export class FriendsComponent implements OnDestroy, OnInit {
   public acceptFriendRequest(request: FriendRequest): void {
     if (request.requestor.id) {
       this.userServerAdapter
-        .postFriendship({requestorId: request.requestor.id, requesteeId: this.user?.id as number})
+        .postFriendship({requestorId: request.requestor.id, requesteeId: this.user?.id as string})
         .subscribe({
           next: (friendship) => {
             this.store.dispatch(AuthActions.updateFriendships(friendship));

@@ -1,7 +1,7 @@
 import {Post} from './post';
 
 export interface User {
-  id?: number;
+  id?: string;
   dateCreated?: Date;
   dateUpdated?: Date;
   username: string;
@@ -16,7 +16,7 @@ export interface User {
 }
 
 export interface Friendship {
-  id?: number;
+  id?: string;
   dateCreated?: Date;
   friend: User;
 }
@@ -44,13 +44,13 @@ export interface UpdateUserDto {
 }
 
 export interface FriendRequest {
-  id: number;
+  id: string;
   dateCreated: Date;
   requestor: User;
   requestee: User;
 }
 
 export interface FriendRequestDto {
-  requestorId: number;
-  requesteeId: number;
+  requestorId: string;
+  requesteeId: string;
 }

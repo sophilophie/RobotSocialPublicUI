@@ -2,8 +2,8 @@ describe('search (e2e)', () => {
   beforeEach(() => {
     window.localStorage.setItem('access_token', 'TEST_TOKEN');
     cy.intercept('http://localhost:3000/auth/refresh', {fixture: 'login-fixture.json'}).as('implicitLogin');
-    cy.intercept('http://localhost:3000/posts/feed/1', {fixture: 'feed-fixture.json'}).as('getUserFeed');
-    cy.intercept('http://localhost:3000/posts/1', {fixture: 'posts-fixture.json'}).as('getUserPosts');
+    cy.intercept('http://localhost:3000/posts/feed/uuid1', {fixture: 'feed-fixture.json'}).as('getUserFeed');
+    cy.intercept('http://localhost:3000/posts/uuid1', {fixture: 'posts-fixture.json'}).as('getUserPosts');
     cy.intercept('http://localhost:3000/users/search?searchTerm=Test', {fixture: 'search-fixture.json'}).as(
       'getSearch',
     );

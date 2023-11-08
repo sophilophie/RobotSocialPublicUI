@@ -8,7 +8,7 @@ import {NotificationService} from '../util/notification.service';
 export class PostServerAdapterService {
   constructor(private httpClient: HttpClient, private notificationService: NotificationService) {}
 
-  public getNewsFeed(userId: number | undefined): Observable<FeedResponse> {
+  public getNewsFeed(userId: string | undefined): Observable<FeedResponse> {
     return this.httpClient.get<Post[]>(`http://localhost:3000/posts/feed/${userId}`).pipe(
       map((posts: Post[]): FeedResponse => {
         return {feed: posts};
@@ -16,7 +16,7 @@ export class PostServerAdapterService {
     );
   }
 
-  public getUserPosts(userId: number | undefined): Observable<PostsResponse> {
+  public getUserPosts(userId: string | undefined): Observable<PostsResponse> {
     return this.httpClient.get<Post[]>('http://localhost:3000/posts/' + userId).pipe(
       map((posts: Post[]): PostsResponse => {
         return {posts};

@@ -28,7 +28,7 @@ export class UserServerAdapterService {
     return this.httpClient.post<JwtResponse>('http://localhost:3000/auth/refresh', jwtDto);
   }
 
-  public putUser(user: UpdateUserDto, id: number): Observable<User> {
+  public putUser(user: UpdateUserDto, id: string): Observable<User> {
     return this.httpClient.put<User>(`http://localhost:3000/users/${id}`, user);
   }
 

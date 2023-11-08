@@ -1,7 +1,7 @@
 import {User} from './user';
 
 export interface Post {
-  id: number;
+  id: string;
   content: string;
   dateCreated: Date;
   user: User;
@@ -12,12 +12,12 @@ export interface FeedResponse {
 }
 
 export interface FeedRequestProp {
-  userId: number | undefined;
+  userId: string | undefined;
 }
 
 export interface CreatePostDto {
   content: string;
-  userId: number | undefined;
+  userId: string | undefined;
 }
 
 export interface PostsResponse {

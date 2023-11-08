@@ -13,7 +13,7 @@ describe('SearchComponent', () => {
   let mockUserServerAdapter: any, mockStore: any, mockNotificationService: any;
 
   const mockUser: User = {
-    id: 1,
+    id: 'uuid1',
     firstName: 'Test',
     lastName:'Test',
     email: 'test@test.com',
@@ -58,7 +58,7 @@ describe('SearchComponent', () => {
   });
 
   it('should send friend request', () => {
-    component.sendFriendRequest(1);
+    component.sendFriendRequest('uuid1');
     expect(mockUserServerAdapter.postFriendRequest).toHaveBeenCalled();
   });
 });

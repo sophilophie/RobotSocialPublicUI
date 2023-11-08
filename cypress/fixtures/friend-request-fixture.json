@@ -1,8 +1,8 @@
 {
-  "id": 1,
+  "id": "uuid1",
   "dateCreated": "2023-11-04T19:38:22.148Z",
   "requestee": {
-    "id": 2,
+    "id": "uuid2",
     "username": "e2eTester1",
     "firstName": "e2e1",
     "lastName": "tester1",

@@ -2,8 +2,8 @@ describe('Profile (e2e)', () => {
   beforeEach(() => {
     window.localStorage.setItem('access_token', 'TEST_TOKEN');
     cy.intercept('http://localhost:3000/auth/refresh', {fixture: 'login-fixture.json'}).as('implicitLogin');
-    cy.intercept('http://localhost:3000/posts/feed/1', {fixture: 'feed-fixture.json'}).as('getUserFeed');
-    cy.intercept('http://localhost:3000/posts/1', {fixture: 'posts-fixture.json'}).as('getUserPosts');
+    cy.intercept('http://localhost:3000/posts/feed/uuid1', {fixture: 'feed-fixture.json'}).as('getUserFeed');
+    cy.intercept('http://localhost:3000/posts/uuid1', {fixture: 'posts-fixture.json'}).as('getUserPosts');
     cy.visit('localhost:4200/profile');
   });
 
@@ -19,7 +19,7 @@ describe('Profile (e2e)', () => {
     cy.get('.rspui-profile-data button').click();
     cy.get('rspui-edit-profile-dialog').should('be.visible');
     cy.get('input.first-name-input').clear().type('EndTwoEnd');
-    cy.intercept('PUT', 'http://localhost:3000/users/1', {fixture: 'edited-user-fixture.json'});
+    cy.intercept('PUT', 'http://localhost:3000/users/uuid1', {fixture: 'edited-user-fixture.json'});
     cy.get('button.rspui-submit-button').click();
     cy.get('.rspui-header-container h1').should('contain', 'EndTwoEnd user');
   });

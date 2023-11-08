@@ -161,7 +161,7 @@ export class AuthEffects {
       ofType(AuthActions.updateUserRequest),
       exhaustMap((user): ObservableInput<any> => {
         this.loadingOverlayService.isLoading$.next(true);
-        return this.userServerAdapterService.putUser(user, user.id as number).pipe(
+        return this.userServerAdapterService.putUser(user, user.id as string).pipe(
           map((response) => AuthActions.updateUserSuccess(response)),
           catchError((error) => of(AuthActions.updateUserFailure(error))),
         );

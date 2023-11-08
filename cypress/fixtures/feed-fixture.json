@@ -1,10 +1,10 @@
 [
   {
-    "id": 1,
+    "id": "uuid1",
     "content": "Test One",
     "timePosted": "2023-08-22T22:40:32.584Z",
     "user": {
-      "id": 2,
+      "id": "uuid2",
       "username": "e2eTester1",
       "firstName": "e2e1",
       "lastName": "tester1",
@@ -12,11 +12,11 @@
     }
   },
   {
-    "id": 2,
+    "id": "uuid2",
     "content": "Test Two",
     "timePosted": "2023-08-22T22:44:05.767Z",
     "user": {
-      "id": 3,
+      "id": "uuid3",
       "username": "e2eTester2",
       "firstName": "e2e2",
       "lastName": "tester2",
@@ -24,11 +24,11 @@
     }
   },
   {
-    "id": 3,
+    "id": "uuid3",
     "content": "Test Three",
     "timePosted": "2023-08-22T22:45:51.700Z",
     "user": {
-      "id": 4,
+      "id": "uuid4",
       "username": "e2eTester3",
       "firstName": "e2e3",
       "lastName": "tester3",
@@ -37,11 +37,11 @@
   },
 
   {
-    "id": 4,
+    "id": "uuid4",
     "content": "Test One",
     "timePosted": "2023-08-22T22:46:16.282Z",
     "user": {
-      "id": 2,
+      "id": "uuid2",
       "username": "e2eTester1",
       "firstName": "e2e1",
       "lastName": "tester1",

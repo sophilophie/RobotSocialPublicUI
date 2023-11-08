@@ -1,8 +1,8 @@
 {
-  "id": 2,
+  "id": "uuid2",
   "dateCreated": "2023-11-07T04:54:08.439Z",
   "friend": {
-    "id": 4,
+    "id": "uuid4",
     "username": "e2eTester3",
     "firstName": "e2e3",
     "lastName": "tester3",
