@@ -13,7 +13,7 @@ describe('FriendsComponent', () => {
   let mockUserServerAdapter: any, mockStore: any, mockNotificationService: any;
 
   const mockUser: User = {
-    id: 1,
+    id: 'uuid1',
     firstName: 'Test',
     lastName: 'Test',
     email: 'test@test.com',
@@ -25,7 +25,7 @@ describe('FriendsComponent', () => {
   };
 
   const mockRequestor: User = {
-    id: 2,
+    id: 'uuid2',
     firstName: 'Test2',
     lastName: 'Test2',
     email: 'test2@test.com',
@@ -56,6 +56,6 @@ describe('FriendsComponent', () => {
   });
 
   it('should complete friend request', () => {
-    component.acceptFriendRequest({id: 1, dateCreated: new Date(), requestee: mockUser, requestor: mockRequestor});
+    component.acceptFriendRequest({id: 'uuid1', dateCreated: new Date(), requestee: mockUser, requestor: mockRequestor});
   });
 });

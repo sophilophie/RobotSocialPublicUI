@@ -1,7 +1,7 @@
 {
   "session_token": "NEW_TOKEN",
   "user": {
-    "id": 1,
+    "id": "uuid1",
     "username": "e2eUserName",
     "firstName": "e2e",
     "lastName": "user",
@@ -9,10 +9,10 @@
     "requestedFriends": [],
     "requestsReceived": [
       {
-        "id": 2,
+        "id": "uuid2",
         "dateCreated": "2023-11-07T04:54:08.439Z",
         "requestor": {
-          "id": 4,
+          "id": "uuid4",
           "username": "e2eTester3",
           "firstName": "e2e3",
           "lastName": "tester3",
@@ -22,10 +22,10 @@
     ],
     "friendships": [
       {
-        "id": 2,
+        "id": "uuid2",
         "dateCreated": "2023-11-07T04:54:08.439Z",
         "friend": {
-          "id": 3,
+          "id": "uuid3",
           "username": "e2eTester2",
           "firstName": "e2e2",
           "lastName": "tester2",

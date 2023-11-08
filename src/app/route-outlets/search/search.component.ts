@@ -68,9 +68,9 @@ export class SearchComponent implements OnDestroy, OnInit {
     this.searchResults = [];
   }
 
-  public sendFriendRequest(requesteeId?: number): void {
+  public sendFriendRequest(requesteeId?: string): void {
     if (this.user && requesteeId) {
-      this.userServerAdapter.postFriendRequest({requesteeId, requestorId: this.user.id as number}).subscribe({
+      this.userServerAdapter.postFriendRequest({requesteeId, requestorId: this.user.id as string}).subscribe({
         next: (friendRequest) => {
           this.store.dispatch(AuthActions.updateSentFriendRequests(friendRequest));
           this.notificationService.success('Friend request sent!');
