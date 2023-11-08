@@ -1,5 +1,9 @@
 describe('Root (e2e)', () => {
-  before(() => {
+  beforeEach(() => {
+    localStorage.setItem('access_token', 'TOKEN');
+    cy.intercept('http://localhost:3000/auth/refresh', {fixture: 'login-fixture.json'}).as('implicitLogin');
+    cy.intercept('http://localhost:3000/posts/feed/1', {fixture: 'feed-fixture.json'}).as('getUserFeed');
+    cy.intercept('http://localhost:3000/posts/1', {fixture: 'posts-fixture.json'}).as('getUserPosts');
     cy.visit('localhost:4200');
   });
 
@@ -8,11 +12,6 @@ describe('Root (e2e)', () => {
   });
 
   it('should login if token present in localStorage', () => {
-    localStorage.setItem('access_token', 'TOKEN');
-    cy.intercept('http://localhost:3000/auth/refresh', {fixture: 'login-fixture.json'}).as('implicitLogin');
-    cy.intercept('http://localhost:3000/posts/feed/0', {fixture: 'feed-fixture.json'}).as('getUserFeed');
-    cy.intercept('http://localhost:3000/posts/0', {fixture: 'posts-fixture.json'}).as('getUserPosts');
-    cy.visit('localhost:4200');
     cy.wait('@implicitLogin');
     cy.wait('@getUserFeed');
     cy.wait('@getUserPosts');
@@ -21,11 +20,6 @@ describe('Root (e2e)', () => {
   });
 
   it('should logout on logout button click', () => {
-    localStorage.setItem('access_token', 'TOKEN');
-    cy.intercept('http://localhost:3000/auth/refresh', {fixture: 'login-fixture.json'}).as('implicitLogin');
-    cy.intercept('http://localhost:3000/posts/feed/0', {fixture: 'feed-fixture.json'}).as('getUserFeed');
-    cy.intercept('http://localhost:3000/posts/0', {fixture: 'posts-fixture.json'}).as('getUserPosts');
-    cy.visit('localhost:4200');
     cy.wait('@implicitLogin');
     cy.wait('@getUserFeed');
     cy.wait('@getUserPosts');

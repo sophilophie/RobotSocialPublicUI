@@ -40,7 +40,7 @@
     "content": "Test One",
     "timePosted": "2023-08-22T22:46:16.282Z",
     "user": {
-      "id": 4,
+      "id": 2,
       "username": "e2eTester1",
       "firstName": "e2e1",
       "lastName": "tester1",
@@ -52,7 +52,7 @@
     "content": "This is a test",
     "timePosted": "2023-08-22T22:47:16.282Z",
     "user": {
-      "id": 0,
+      "id": 1,
       "username": "e2eTester0",
       "firstName": "e2e",
       "lastName": "tester",

@@ -16,3 +16,13 @@ h1 {
 .rspui-time-posted {
   font-size: 0.8rem;
 }
+
+mat-card-content {
+  p {
+    white-space: pre-line;
+  }
+}
+
+mat-error {
+  margin-top: -20px;
+}

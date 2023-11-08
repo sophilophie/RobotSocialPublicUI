@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "username": "e2eUserName",
+    "firstName": "e2e",
+    "lastName": "user",
+    "email": "e2euser@test.com"
+  },
+  {
+    "id": 2,
+    "username": "e2eTester1",
+    "firstName": "e2e1",
+    "lastName": "tester1",
+    "email": "e2eTester1@test.com"
+  },
+  {
+    "id": 3,
+    "username": "e2eTester2",
+    "firstName": "e2e2",
+    "lastName": "tester2",
+    "email": "e2eTester2@test.com"
+  },
+  {
+    "id": 4,
+    "username": "e2eTester3",
+    "firstName": "e2e3",
+    "lastName": "tester3",
+    "email": "e2eTester3@test.com"
+  },
+  {
+    "id": 5,
+    "username": "e2eTester4",
+    "firstName": "e2e4",
+    "lastName": "tester4",
+    "email": "e2eTester4@test.com"
+  }
+]

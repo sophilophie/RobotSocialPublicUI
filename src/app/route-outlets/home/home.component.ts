@@ -51,19 +51,21 @@ export class HomeComponent implements OnDestroy, OnInit {
   }
 
   public createPost(): void {
-    const postDto = {
-      content: this.postInput?.nativeElement.value,
-      userId: this.user?.id,
-    };
-    this.postServerAdapterService.postNewPost(postDto).subscribe(() => {
-      if (this.user) {
-        this.store.dispatch(FeedActions.newsFeedRequest(this.user));
-        this.store.dispatch(FeedActions.userPostsRequest(this.user));
-      }
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      this.postInput!.nativeElement.value = '';
-      this.evaluateHeight();
-    });
+    if (!this.hasTooManyLines()) {
+      const postDto = {
+        content: this.postInput?.nativeElement.value.replace(/\n\s*\n/g, '\n'),
+        userId: this.user?.id,
+      };
+      this.postServerAdapterService.postNewPost(postDto).subscribe(() => {
+        if (this.user) {
+          this.store.dispatch(FeedActions.newsFeedRequest(this.user));
+          this.store.dispatch(FeedActions.userPostsRequest(this.user));
+        }
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        this.postInput!.nativeElement.value = '';
+        this.evaluateHeight();
+      });
+    }
   }
 
   public evaluateHeight(): void {
@@ -71,5 +73,9 @@ export class HomeComponent implements OnDestroy, OnInit {
     this.postInput!.nativeElement.style.height = 'auto';
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.postInput!.nativeElement.style.height = `${this.postInput?.nativeElement.scrollHeight}px`;
+  }
+
+  public hasTooManyLines(): boolean {
+    return this.postInput?.nativeElement.value.split('\n').length > 10;
   }
 }
