@@ -44,8 +44,8 @@ export class SearchComponent implements OnDestroy, OnInit {
 
   public executeSearch(event?: Event): void {
     event?.preventDefault();
-    if (this.searchInput?.nativeElement.value) {
-      this.userServerAdapter.getSearchedUsers(this.searchInput?.nativeElement.value).subscribe({
+    if (this.searchInput?.nativeElement.value && this.user?.id) {
+      this.userServerAdapter.getSearchedUsers(this.searchInput?.nativeElement.value, this.user?.id).subscribe({
         next: (searchResults: User[]) => {
           this.searchResults = searchResults;
         },
