@@ -32,8 +32,8 @@ export class UserServerAdapterService {
     return this.httpClient.put<User>(`http://localhost:3000/users/${id}`, user);
   }
 
-  public getSearchedUsers(searchTerm: string): Observable<User[]> {
-    return this.httpClient.get<User[]>('http://localhost:3000/users/search', {params: {searchTerm}});
+  public getSearchedUsers(searchTerm: string, userId: string): Observable<User[]> {
+    return this.httpClient.get<User[]>('http://localhost:3000/users/search', {params: {searchTerm, userId}});
   }
 
   public postFriendRequest(request: FriendRequestDto): Observable<FriendRequest> {
